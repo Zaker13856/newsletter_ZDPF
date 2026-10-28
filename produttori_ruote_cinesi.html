@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruote cinesi in carbonio: chi le fa davvero — ZD Bike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<style>
+:root{--navy:#0B2A42;--sea:#155A82;--ember:#E15A2C;--gold:#F0B429;--sand:#F4EFE3;--border:#D9D2BE;--paper:#FCFAF3;--ink2:#3A4550}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--navy);font-family:Inter,sans-serif;line-height:1.6;font-size:15.5px}
+a{color:var(--sea)}a:hover{color:var(--ember)}
+.topbar{background:var(--navy);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:50%;border:3px solid var(--gold);object-fit:cover}
+.brand span{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:.02em;color:#fff;text-transform:uppercase}
+.topbar .tb-r{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+.page{width:min(980px,calc(100vw - 24px));margin:0 auto;padding:40px 0 60px}
+.memo-head{border-bottom:3px solid var(--navy);padding-bottom:18px;margin-bottom:24px}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ember);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:42px;line-height:1.02;margin:10px 0 10px}
+.sub{font-size:17px;color:var(--ink2);max-width:720px;margin:0;text-wrap:pretty}
+.meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--sea);text-transform:uppercase;letter-spacing:.04em}
+.meta b{color:var(--navy)}
+.verdict{background:var(--navy);color:#fff;padding:24px 26px;margin:0 0 22px}
+.verdict .vk{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.verdict ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.5}
+.verdict li::marker{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:700}
+.verdict b{color:var(--gold)}
+.verdict a.ref{color:#8FB7D3}
+nav.toc{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px;position:sticky;top:0;background:var(--sand);padding:10px 0;z-index:500}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:6px 12px;border:1px solid #C9BFA3;border-radius:20px;text-decoration:none;color:var(--navy);background:var(--sand);white-space:nowrap}
+nav.toc a:hover{border-color:var(--ember);color:var(--ember)}
+section{scroll-margin-top:60px}
+h2.sec{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:22px;letter-spacing:.02em;border-left:4px solid var(--ember);padding:2px 0 2px 12px;margin:40px 0 14px}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:17px;letter-spacing:.02em;margin:24px 0 8px;color:var(--sea)}
+p{margin:0 0 12px;max-width:820px;text-wrap:pretty}
+.tw{overflow-x:auto;margin:14px 0 14px;border:1px solid var(--border);background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:13.8px;line-height:1.45}
+th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+thead th{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--sea);background:#EFEADA;font-weight:700;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.nm{font-weight:700;white-space:nowrap}
+td.num{font-family:'JetBrains Mono',monospace;font-weight:600;white-space:nowrap}
+a.ref{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-decoration:none;white-space:nowrap;color:var(--sea)}
+.q{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;background:#E8EEF2;color:var(--sea);margin-left:4px;vertical-align:1px}
+.q.d{background:#FCEBEB;color:#B03A2E}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:3px;white-space:nowrap}
+.tag.low{background:#EFF6EF;color:#2E7D4F}.tag.mid{background:#FFF3E2;color:#A4650C}.tag.high{background:#FCEBEB;color:#B03A2E}
+.callout{background:var(--paper);border:1px solid var(--border);border-left:4px solid var(--sea);padding:14px 18px;font-size:14.5px;color:var(--ink2);margin:12px 0}
+.callout b{color:var(--navy)}
+.map-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0;border:1px solid var(--border);background:var(--paper);margin:14px 0}
+#map{height:100%;min-height:440px;background:#E9E5D8}
+.map-side{padding:16px 18px;border-left:1px solid var(--border);font-size:13.5px;display:flex;flex-direction:column;gap:14px}
+.map-side .grp-t{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--sea);margin-bottom:4px}
+.map-side ul{margin:0;padding-left:18px}
+.map-side li{margin:2px 0}
+.map-btns{display:flex;gap:8px;flex-wrap:wrap}
+.map-btns button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;padding:6px 12px;border-radius:20px;border:1px solid #C9BFA3;background:transparent;color:var(--navy);cursor:pointer;white-space:nowrap}
+.map-btns button.on{background:var(--ember);border-color:var(--ember);color:#fff}
+.map-note{font-size:12px;color:#5b6d79;line-height:1.45}
+.dist-label{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;color:var(--navy);background:rgba(252,250,243,.92);border:1px solid var(--border);padding:2px 6px;white-space:nowrap}
+.cov td{text-align:center}
+.cov td.nm{text-align:left}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid var(--sea);vertical-align:-2px}
+.dot.f{background:var(--sea)}
+.dot.p{background:linear-gradient(90deg,var(--sea) 50%,transparent 50%)}
+.dot.n{border-color:#C9BFA3}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-top:6px}
+.legend span{display:flex;align-items:center;gap:6px}
+.check{list-style:none;padding:0;margin:14px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;counter-reset:c}
+.check li{background:var(--paper);border:1px solid var(--border);padding:14px 16px 14px 52px;position:relative;font-size:14.3px;line-height:1.5;counter-increment:c}
+.check li::before{content:counter(c,decimal-leading-zero);position:absolute;left:14px;top:13px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ember);font-size:15px}
+.check b{display:block;margin-bottom:2px}
+details{border:1px solid var(--border);background:var(--paper);margin:14px 0}
+details summary{cursor:pointer;padding:14px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details summary::after{content:'+';font-family:'JetBrains Mono',monospace;color:var(--ember)}
+details[open] summary::after{content:'–'}
+details .db{padding:0 18px 16px}
+details .db .tw{background:#fff}
+ol.sources{padding-left:34px;font-size:13px;line-height:1.45;columns:2;column-gap:28px}
+ol.sources li{break-inside:avoid;padding:4px 0}
+ol.sources li:target{background:#FFF3E2}
+ol.sources small{display:block;color:#5b6d79}
+.footer{margin-top:40px;border-top:2px solid var(--navy);padding-top:16px;display:flex;justify-content:space-between;gap:14px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;color:#5b6d79;flex-wrap:wrap}
+@media (max-width:760px){
+  h1{font-size:32px}
+  .map-wrap{grid-template-columns:1fr}
+  .map-side{border-left:none;border-top:1px solid var(--border)}
+  #map{height:360px}
+  ol.sources{columns:1}
+  table{font-size:13px}th,td{padding:8px}
+}
+@media print{nav.toc,.map-btns{display:none}details{display:block}details .db{display:block}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><img src="images/logo.png" alt="Logo ZD Bike"><span>ZD Bike</span></a>
+  <div class="tb-r">Ricerca industriale · N.18</div>
+</header>
+
+<main class="page">
+
+<div class="memo-head">
+  <div class="kicker"><span>ZD Bike · Ricerca industriale</span><span>N.18 · Dati globali</span></div>
+  <h1>Ruote cinesi in carbonio:<br>chi le fa davvero</h1>
+  <p class="sub">Dossier su 12 produttori: dimensioni, brevetti, origine dei mozzi, forniture al professionismo, garanzie. Cosa si può verificare su fonti aperte e cosa no.</p>
+  <div class="meta">
+    <span>Operatori: <b>12</b></span>
+    <span>Fonti: <b>66</b></span>
+    <span>Consultazione: <b>5–6 ottobre 2026</b></span>
+  </div>
+</div>
+
+<div class="verdict">
+  <div class="vk">In sintesi</div>
+  <ol>
+    <li><b>Una classifica non è ancora possibile.</b> Mancano bilanci comparabili, spesa in R&amp;S e test di durata indipendenti. Per nessuno dei 12 operatori i dati raccolti coprono abbastanza aree da sostenere un punteggio.</li>
+    <li><b>Elitewheels ha il profilo più documentato:</b> fornitura al ProTeam Solution Tech NIPPO Rali confermata dalla squadra per il 2026, garanzia di 3 anni con crash replacement al 38%, centri assistenza anche in Europa. <a class="ref" href="#s5">[5]</a> <a class="ref" href="#s51">[51]</a> <a class="ref" href="#s53">[53]</a></li>
+    <li><b>Superteam ha le evidenze brevettuali più concrete</b> (tre documenti della casa madre Baiyexing), ma garantisce i mozzi 1 anno contro i 3 dei cerchi ed esclude gli incidenti. <a class="ref" href="#s24">[24]</a> <a class="ref" href="#s30">[30]</a></li>
+    <li><b>Nessun test di durata indipendente pubblico</b> per nessun modello. L'omologazione UCI prevede una prova d'impatto da 40 J: è un requisito minimo per correre, non una misura della durata. <a class="ref" href="#s42">[42]</a> <a class="ref" href="#s62">[62]</a></li>
+    <li><b>Il mozzo cambia da serie a serie</b>, anche nello stesso marchio: DT Swiss su un modello, ratchet a marchio proprio su un altro. Va valutata la distinta della ruota che si compra, non il marchio.</li>
+  </ol>
+</div>
+
+<nav class="toc">
+  <a href="#distretto">Distretto</a><a href="#operatori">12 operatori</a><a href="#garanzie">Garanzie</a><a href="#copertura">Dati mancanti</a><a href="#mozzi">Mozzi</a><a href="#pro">Pro e UCI</a><a href="#brevetti">Brevetti</a><a href="#schede">Schede</a><a href="#checklist">Checklist</a><a href="#metodo">Metodo</a><a href="#fonti">Fonti</a>
+</nav>
+
+<section id="distretto">
+<h2 class="sec">01 · Il distretto di Xiamen</h2>
+<p>Dieci dei dodici operatori hanno sede a Xiamen, nel Fujian: lo indicano le ragioni sociali dichiarate o gli indirizzi pubblicati. Fa eccezione ICAN, con sede a Shenzhen; per NTP Composites la corrispondenza con una ragione sociale cinese non è chiusa. Per quattro operatori l'indirizzo indica anche il distretto: Elitewheels, Light Bicycle e Farsports a Jimei, YOELEO a Huli. Per gli altri sei il distretto non è stato verificato.</p>
+<p>La concentrazione aiuta a leggere il settore: molti marchi del distretto sono nati come produttori per conto terzi, e DeerCycles, ORNANBIKE e NTP dichiarano tuttora un'attività OEM/ODM. <a class="ref" href="#s36">[36]</a> <a class="ref" href="#s37">[37]</a> <a class="ref" href="#s41">[41]</a> La vicinanza geografica, però, non dimostra rapporti di fornitura fra i marchi.</p>
+
+<div class="map-wrap">
+  <div id="map" role="img" aria-label="Mappa di Xiamen con i distretti in cui hanno sede i produttori di ruote"></div>
+  <div class="map-side">
+    <div class="map-btns"><button id="b-x" class="on" type="button">Xiamen</button><button id="b-r" type="button">Vista regionale</button></div>
+    <div>
+      <div class="grp-t">Jimei · 3 operatori</div>
+      <ul>
+        <li>Elitewheels <a class="ref" href="#s55">[55]</a></li>
+        <li>Light Bicycle <a class="ref" href="#s61">[61]</a></li>
+        <li>Farsports <a class="ref" href="#s57">[57]</a><span class="q">C</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="grp-t">Huli · 1 operatore</div>
+      <ul><li>YOELEO <a class="ref" href="#s65">[65]</a><span class="q">C</span></li></ul>
+    </div>
+    <div>
+      <div class="grp-t">Xiamen, distretto non verificato · 6</div>
+      <ul><li>Winspace / Lún</li><li>Superteam (Baiyexing)</li><li>Carbonal / CarbonKing</li><li>LightCarbon / ProX</li><li>DeerCycles</li><li>ORNANBIKE</li></ul>
+    </div>
+    <div>
+      <div class="grp-t">Fuori Xiamen</div>
+      <ul><li>ICAN · Shenzhen <a class="ref" href="#s21">[21]</a></li><li>NTP Composites · sede da verificare</li></ul>
+    </div>
+    <div class="map-note">I marcatori indicano il distretto, non l'indirizzo esatto. C = indirizzo tratto da directory B2B.</div>
+  </div>
+</div>
+
+<h3>Capacità produttive dichiarate</h3>
+<div class="tw"><table>
+<thead><tr><th>Operatore</th><th>Misura dichiarata</th><th>Come leggerla</th><th>Fonte</th></tr></thead>
+<tbody>
+<tr><td class="nm">Carbonal / CarbonKing</td><td>10.000 cerchi/mese; 25 ingegneri R&amp;S</td><td>Capacità e personale dichiarati; spesa R&amp;S ignota.</td><td><a class="ref" href="#s31">[31]</a></td></tr>
+<tr><td class="nm">NTP Composites</td><td>7.000–10.000 cerchi/mese</td><td>Output dichiarato; periodo e volumi effettivi non verificati.</td><td><a class="ref" href="#s39">[39]</a></td></tr>
+<tr><td class="nm">LightCarbon / ProX</td><td>5.000 cerchi e 1.200 coppie/mese; oltre 15 ingegneri</td><td>Gli ingegneri non sono attribuiti tutti alla divisione ruote.</td><td><a class="ref" href="#s33">[33]</a></td></tr>
+<tr><td class="nm">DeerCycles</td><td>2.500 cerchi/mese</td><td>Capacità, non coppie vendute né ricavi.</td><td><a class="ref" href="#s36">[36]</a></td></tr>
+<tr><td class="nm">ICAN</td><td>Circa 2.000 coppie/mese su un sito, circa 1.000 su un altro</td><td>Dato discordante fra i due siti dell'azienda.</td><td><a class="ref" href="#s21">[21]</a> <a class="ref" href="#s23">[23]</a></td></tr>
+</tbody></table></div>
+<p>La capacità mensile non si converte in fatturato moltiplicandola per il prezzo al dettaglio: una parte va a clienti OEM a prezzi diversi, e l'utilizzo degli impianti non è noto.</p>
+</section>
+
+<section id="operatori">
+<h2 class="sec">02 · Mappa dei 12 operatori</h2>
+<p>Qualità della fonte: <b>A</b> documenti ufficiali o misure verificabili; <b>B</b> dichiarazioni aziendali; <b>C</b> profili o database con perimetro identificabile; <b>D</b> stime commerciali non validate. "n.d." significa non documentato, non zero.</p>
+<div class="tw"><table>
+<thead><tr><th>Operatore</th><th>Società dichiarata</th><th>Addetti</th><th>Fatturato</th><th>Brevetti</th><th>Fonti</th></tr></thead>
+<tbody>
+<tr><td class="nm">Elitewheels</td><td>Xiamen Yuan An Composite Technology Co Ltd (厦门缘安复材科技有限公司); sito gestito da Xiamen Elite Sporting Goods Co Ltd</td><td>201–500<span class="q">C</span></td><td>n.d.</td><td>32 dichiarati; famiglie attive non verificate</td><td><a class="ref" href="#s1">[1]</a> <a class="ref" href="#s2">[2]</a> <a class="ref" href="#s3">[3]</a> <a class="ref" href="#s54">[54]</a></td></tr>
+<tr><td class="nm">Farsports</td><td>Xiamen Far Sports Industry &amp; Trade Co Ltd nei profili B2B; perimetro produttivo da chiudere</td><td>35<span class="q d">D</span></td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s6">[6]</a> <a class="ref" href="#s9">[9]</a> <a class="ref" href="#s57">[57]</a></td></tr>
+<tr><td class="nm">Winspace / Lún</td><td>Xiamen Winspace Sporting Goods Co Ltd nei brevetti; Winspace Cycling Co Limited nei documenti commerciali</td><td>51–200<span class="q">C</span></td><td>n.d.</td><td>2 modelli di utilità pertinenti</td><td><a class="ref" href="#s10">[10]</a> <a class="ref" href="#s11">[11]</a></td></tr>
+<tr><td class="nm">Light Bicycle</td><td>LIGHT BICYCLE CO LIMITED; titolarità della fabbrica da chiudere</td><td>51–200<span class="q">C</span></td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s13">[13]</a> <a class="ref" href="#s14">[14]</a> <a class="ref" href="#s16">[16]</a></td></tr>
+<tr><td class="nm">YOELEO</td><td>Xiamen Yoeleo Sports Co Ltd nei profili B2B; entità produttrice da chiudere</td><td>11–50<span class="q">C</span></td><td>US$1–10 mln<span class="q d">D</span></td><td>Non censito</td><td><a class="ref" href="#s17">[17]</a> <a class="ref" href="#s20">[20]</a> <a class="ref" href="#s65">[65]</a></td></tr>
+<tr><td class="nm">ICAN</td><td>Shenzhen ICAN Sports Equipment Company Limited</td><td>Oltre 200, anche telai<span class="q">B</span></td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s21">[21]</a> <a class="ref" href="#s23">[23]</a></td></tr>
+<tr><td class="nm">Superteam</td><td>Xiamen Baiyexing Outdoor Products Co Ltd (厦门佰业兴户外用品有限公司)</td><td>51–100<span class="q d">D</span></td><td>n.d.</td><td>3 documenti pertinenti (non il totale)</td><td><a class="ref" href="#s24">[24]</a> <a class="ref" href="#s25">[25]</a></td></tr>
+<tr><td class="nm">Carbonal / CarbonKing</td><td>Xiamen Carbonal Composite Technology Co Ltd; partnership CarbonKing dichiarata</td><td>300+ operai, perimetro della partnership<span class="q">B</span></td><td>n.d.</td><td>1 domanda EP di CarbonKing</td><td><a class="ref" href="#s31">[31]</a></td></tr>
+<tr><td class="nm">LightCarbon / ProX</td><td>Xiamen LightCarbon Composite Technology Co Ltd</td><td>~50 cerchi, ~80 telai<span class="q">B</span></td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s33">[33]</a></td></tr>
+<tr><td class="nm">DeerCycles</td><td>Xiamen Deer Cycles Industry &amp; Trade Co Ltd</td><td>n.d.</td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s35">[35]</a> <a class="ref" href="#s36">[36]</a></td></tr>
+<tr><td class="nm">ORNANBIKE</td><td>Xiamen Ornanbike Composite Technology Co Ltd</td><td>n.d.</td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s37">[37]</a> <a class="ref" href="#s38">[38]</a></td></tr>
+<tr><td class="nm">NTP Composites</td><td>NexusTech Prime Composites; ragione sociale cinese da chiudere</td><td>n.d.</td><td>n.d.</td><td>Non censito</td><td><a class="ref" href="#s39">[39]</a> <a class="ref" href="#s40">[40]</a> <a class="ref" href="#s41">[41]</a></td></tr>
+</tbody></table></div>
+<p>Le fasce di addetti orientano la verifica ma non danno una classifica: si riferiscono a perimetri diversi (solo ruote, ruote e telai, partnership industriali) e quasi mai riportano l'anno. Le stime di fatturato di livello D, come quella di SignalHire per YOELEO, restano escluse da ogni confronto. <a class="ref" href="#s20">[20]</a></p>
+</section>
+
+<section id="garanzie">
+<h2 class="sec">03 · Garanzia e crash replacement</h2>
+<p>È l'area più facile da documentare e la più utile a chi compra: le condizioni sono pubbliche. Il crash replacement è uno sconto sul prezzo di una ruota nuova quando quella vecchia si rompe per un incidente, che la garanzia sui difetti non copre.</p>
+<div class="tw"><table>
+<thead><tr><th>Marchio</th><th>Difetti</th><th>Crash replacement</th><th>Da sapere</th><th>Fonti</th></tr></thead>
+<tbody>
+<tr><td class="nm">Elitewheels</td><td>3 anni dalla consegna; estendibile a 5 anni a pagamento (US$100) sui prodotti indicati</td><td><span class="tag low">38%</span> su serie Drive e Drive Helix, entro 3 anni, utilizzabile più volte</td><td>Centri assistenza in Nord America, Europa, Australia e Asia. Cuscinetti, corpetti e componenti della ruota libera esclusi.</td><td><a class="ref" href="#s51">[51]</a> <a class="ref" href="#s52">[52]</a> <a class="ref" href="#s53">[53]</a></td></tr>
+<tr><td class="nm">Farsports</td><td>36 mesi sui prodotti in carbonio</td><td><span class="tag low">35%</span> una tantum</td><td>Usura di cuscinetti e raggi esclusa. Reclami gestiti via e-mail.</td><td><a class="ref" href="#s56">[56]</a></td></tr>
+<tr><td class="nm">YOELEO</td><td>3 anni dalla consegna, primo proprietario</td><td><span class="tag low">30%</span> entro 3 anni, 25% oltre; modelli dal 2022</td><td>Spedizione e montaggio a carico del cliente. Superare i limiti di peso o pressione annulla la garanzia.</td><td><a class="ref" href="#s63">[63]</a> <a class="ref" href="#s64">[64]</a></td></tr>
+<tr><td class="nm">Light Bicycle</td><td>Cerchi: 3 anni serie Non-Pro; 5 anni serie Pro, a vita con US$100 per cerchio. Mozzi Speed Hub: 3 anni</td><td><span class="tag mid">10% / 25%</span> sui cerchi Non-Pro / Pro; 15% sui mozzi</td><td>Team di assistenza in Cina, Stati Uniti e Canada. Costi di spedizione e dogana dei resi a carico del cliente.</td><td><a class="ref" href="#s59">[59]</a> <a class="ref" href="#s60">[60]</a></td></tr>
+<tr><td class="nm">Superteam</td><td>Cerchi e raggi 3 anni; <b>mozzi 1 anno</b></td><td><span class="tag high">Non previsto</span></td><td>Entro 30 giorni sostituzione con spedizione pagata; poi spedizione a carico del cliente.</td><td><a class="ref" href="#s30">[30]</a></td></tr>
+<tr><td class="nm">Winspace / Lún</td><td>Ruote 2 anni (telai 3)</td><td><span class="tag high">Non indicato</span> nella pagina di garanzia</td><td>Raggi e cuscinetti considerati consumabili ed esclusi.</td><td><a class="ref" href="#s58">[58]</a></td></tr>
+<tr><td class="nm">ICAN</td><td>2 anni</td><td><span class="tag mid">Previsto</span> per telai e cerchi; sconto non indicato</td><td>Dopo 30 giorni la spedizione per la sostituzione è a carico del cliente.</td><td><a class="ref" href="#s66">[66]</a></td></tr>
+<tr><td class="nm">Carbonal, LightCarbon, DeerCycles, ORNANBIKE, NTP</td><td colspan="3">Condizioni al consumatore non raccolte. Sono operatori in prevalenza OEM/B2B: le condizioni dipendono dal contratto con il marchio cliente.</td><td>—</td></tr>
+</tbody></table></div>
+<div class="callout"><b>Lettura.</b> Le durate vanno lette per componente. Una "garanzia 3 anni" può valere per il cerchio e non per il mozzo, che nella pratica è la parte soggetta a manutenzione. Tutte le garanzie raccolte valgono solo per il primo proprietario.</div>
+</section>
+
+<section id="copertura">
+<h2 class="sec">04 · Dove mancano i dati</h2>
+<p>L'indice proposto nel dossier (appendice A) assegna 100 punti su sette aree. Prima di dare un punteggio serve sapere quanto è coperta ciascuna area. La matrice mostra cosa è stato raccolto per ogni operatore.</p>
+<div class="tw"><table class="cov">
+<thead><tr><th>Operatore</th><th>Dimensione<br>20</th><th>R&amp;S e brevetti<br>15</th><th>Produzione e controlli<br>20</th><th>Mozzi<br>15</th><th>Uso pro<br>15</th><th>Validazione esterna<br>5</th><th>Garanzia<br>10</th></tr></thead>
+<tbody>
+<tr><td class="nm">Elitewheels</td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot f"></i></td></tr>
+<tr><td class="nm">Farsports</td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td></tr>
+<tr><td class="nm">Winspace / Lún</td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td></tr>
+<tr><td class="nm">Light Bicycle</td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td></tr>
+<tr><td class="nm">YOELEO</td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td></tr>
+<tr><td class="nm">ICAN</td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td></tr>
+<tr><td class="nm">Superteam</td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td></tr>
+<tr><td class="nm">Carbonal / CarbonKing</td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td></tr>
+<tr><td class="nm">LightCarbon / ProX</td><td><i class="dot p"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td></tr>
+<tr><td class="nm">DeerCycles</td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td></tr>
+<tr><td class="nm">ORNANBIKE</td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td></tr>
+<tr><td class="nm">NTP Composites</td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot p"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td><td><i class="dot n"></i></td></tr>
+</tbody></table></div>
+<div class="legend"><span><i class="dot f"></i> documentata</span><span><i class="dot p"></i> parziale o solo dichiarata</span><span><i class="dot n"></i> nessuna evidenza raccolta (non significa assenza)</span></div>
+<p style="margin-top:14px">Due colonne sono vuote o quasi per tutti. Nessun operatore pubblica test strutturali o di durata eseguiti da laboratori esterni sul modello venduto. Per produzione e controlli esistono solo descrizioni aziendali: il tour di fabbrica di Farsports, i test interni di NTP, la prova d'impatto da 87 J dichiarata da Light Bicycle. <a class="ref" href="#s6">[6]</a> <a class="ref" href="#s40">[40]</a> <a class="ref" href="#s62">[62]</a> Una promessa di "100% inspected" non vale come registro di controllo.</p>
+</section>
+
+<section id="mozzi">
+<h2 class="sec">05 · Mozzi: DT Swiss o proprietari</h2>
+<p>"Proprietario" può voler dire cose diverse: progettato dal marchio, prodotto da un terzista, oppure un mozzo standard con un altro logo. Una forma simile a un DT Swiss non prova compatibilità né provenienza. Per chi compra conta soprattutto una cosa: <b>se domani si consuma il ratchet o il corpetto, trovo il ricambio?</b></p>
+<p>Un mozzo DT Swiss rende manutenzione e ricambi più prevedibili, perché la rete di assistenza esiste già. Un mozzo progettato e prodotto in casa è una capacità industriale, ma non vale automaticamente di più: dipende da documentazione, ricambi e durata verificata.</p>
+<div class="tw"><table>
+<thead><tr><th>Marchio</th><th>Modello / configurazione</th><th>Origine documentata</th><th>Nota</th><th>Fonti</th></tr></thead>
+<tbody>
+<tr><td class="nm">Elitewheels</td><td>Drive II / mozzo Kinetic</td><td>Progettazione e produzione interne dichiarate</td><td>50T star ratchet; corpetti di altri marchi dichiarati incompatibili</td><td><a class="ref" href="#s4">[4]</a></td></tr>
+<tr><td class="nm">Farsports</td><td>S e C Series 2026 / Light Hub</td><td>Produzione interna descritta</td><td>Ratchet; corpetti in vendita come ricambi</td><td><a class="ref" href="#s6">[6]</a> <a class="ref" href="#s7">[7]</a> <a class="ref" href="#s8">[8]</a></td></tr>
+<tr><td class="nm">Winspace / Lún</td><td>HYPER 3 D45</td><td>Mozzo Lún; produttore non identificato</td><td>Ratchet in titanio dichiarato</td><td><a class="ref" href="#s11">[11]</a></td></tr>
+<tr><td class="nm">Light Bicycle</td><td>DT Swiss oppure Pace Hub</td><td>Misto: fornitore terzo o mozzo a marchio LB</td><td>Pace 36T aggiornabile a 48T, manutenzione senza attrezzi; produttore del Pace da verificare</td><td><a class="ref" href="#s15">[15]</a> <a class="ref" href="#s16">[16]</a></td></tr>
+<tr><td class="nm">YOELEO</td><td>230 DB PRO NXT</td><td>Mozzo a marchio; produttore non documentato</td><td>Corpetto di ricambio in vendita sul sito</td><td><a class="ref" href="#s19">[19]</a></td></tr>
+<tr><td class="nm">ICAN</td><td>D21 oppure DT240 EXP</td><td>Misto: mozzo a marchio o fornitore terzo</td><td>D21 a 6 nottolini</td><td><a class="ref" href="#s22">[22]</a></td></tr>
+<tr><td class="nm">Superteam</td><td>Ultra SL SE D28 51/48</td><td>DT Swiss 180 EXP</td><td>Identifica la piattaforma del mozzo, non certifica il resto della ruota</td><td><a class="ref" href="#s28">[28]</a></td></tr>
+<tr><td class="nm">Superteam</td><td>All Carbon N2 freno a pattino</td><td>Ratchet a marchio; produttore da accertare</td><td>Serie diversa dalla Ultra SL SE: mozzo diverso</td><td><a class="ref" href="#s29">[29]</a></td></tr>
+<tr><td class="nm">Carbonal</td><td>Strada disco con DT350</td><td>DT Swiss 350, raggi Sapim CX-Ray</td><td>Vale per questa configurazione, non per quelle con mozzi OE</td><td><a class="ref" href="#s32">[32]</a></td></tr>
+<tr><td class="nm">LightCarbon / ProX</td><td>Strada disco DT240 EXP</td><td>DT Swiss 240 EXP, Sapim CX-Ray</td><td>Catalogo 2023–2024: verificare disponibilità attuale</td><td><a class="ref" href="#s34">[34]</a></td></tr>
+<tr><td class="nm">ORNANBIKE</td><td>SD17 / RD18</td><td>A marchio ORNAN; produttore da accertare</td><td>Opzioni di terzi a catalogo</td><td><a class="ref" href="#s38">[38]</a></td></tr>
+<tr><td class="nm">DeerCycles, NTP</td><td>Assemblaggi OEM/ODM</td><td>n.d.</td><td>Distinta base da richiedere per ogni configurazione</td><td><a class="ref" href="#s36">[36]</a> <a class="ref" href="#s39">[39]</a></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="pro">
+<h2 class="sec">06 · Professionismo e certificazioni</h2>
+<div class="tw"><table>
+<thead><tr><th>Operatore</th><th>Evidenza</th><th>Valore della prova</th><th>Fonti</th></tr></thead>
+<tbody>
+<tr><td class="nm">Elitewheels</td><td>Rinnovo 2026 con Solution Tech NIPPO Rali, fornitore ufficiale per ProTeam e Development</td><td><span class="tag low">Forte</span> confermato dalla squadra; uso per modello e gara da verificare</td><td><a class="ref" href="#s5">[5]</a></td></tr>
+<tr><td class="nm">Winspace / Lún</td><td>Squadra femminile dal 2024, Tour de France Femmes 2025</td><td><span class="tag mid">Media</span> fonte del marchio; fornitura ruote per stagione da verificare</td><td><a class="ref" href="#s12">[12]</a></td></tr>
+<tr><td class="nm">Superteam</td><td>Annuncio del 20 marzo 2026: Ultra H2 alla Kőbánya, descritta come Continental</td><td><span class="tag mid">Media</span> comunicato del produttore; categoria non confermata in modo indipendente</td><td><a class="ref" href="#s27">[27]</a></td></tr>
+<tr><td class="nm">YOELEO</td><td>Elenco di squadre sponsorizzate senza stagione indicata</td><td><span class="tag high">Debole</span> storico, non attribuibile al 2026</td><td><a class="ref" href="#s18">[18]</a></td></tr>
+<tr><td class="nm">Altri 8</td><td>Forniture pro attuali non accertate</td><td>Nessuna prova raccolta, il che non esclude una fornitura</td><td>—</td></tr>
+</tbody></table></div>
+<p>La partnership triennale Superteam con GCN Italia è un accordo media: le recensioni prodotte nell'accordo non contano come test indipendenti. <a class="ref" href="#s26">[26]</a> Una sponsorizzazione è un rapporto commerciale, non una scelta libera dell'atleta né una garanzia contro i guasti.</p>
+<h3>Come leggere "UCI approved", SGS, EN, ISO</h3>
+<p>L'omologazione UCI si riferisce a un modello specifico e serve per correre nelle gare UCI. Il protocollo in vigore dal 2024 prevede, fra l'altro, una prova d'impatto da 40 J sulla ruota senza copertoncino, e richiede dichiarazioni del fabbricante sui requisiti ISO applicabili. <a class="ref" href="#s42">[42]</a> <a class="ref" href="#s62">[62]</a> Non misura fatica né durata del mozzo. Per diciture SGS, EN o ISO servono numero del rapporto, laboratorio, versione della norma e modello testato: senza questi elementi un logo resta una dichiarazione. Un test aerodinamico misura la resistenza all'aria, non la robustezza.</p>
+</section>
+
+<section id="brevetti">
+<h2 class="sec">07 · Brevetti</h2>
+<p>Otto documenti identificati: è un campione, non un censimento dei portafogli. Un brevetto documenta attività inventiva, non prestazioni misurate sul prodotto. Gli stati Active e Pending sono quelli riportati da Google Patents, non una verifica legale presso CNIPA o EPO.</p>
+<div class="tw"><table>
+<thead><tr><th>Documento</th><th>Oggetto</th><th>Priorità</th><th>Stato</th><th>Titolare</th><th>Attribuzione</th></tr></thead>
+<tbody>
+<tr><td class="num"><a href="#s43">CN112092532B</a></td><td>Raggi in carbonio e metodo di produzione</td><td class="num">2020-07-21</td><td>Invenzione concessa (28/10/2025), Active</td><td>Xiamen Baiyexing Outdoor Sports Equipment</td><td>Superteam, tramite la casa madre dichiarata</td></tr>
+<tr><td class="num"><a href="#s44">CN217553578U</a></td><td>Raggi in carbonio e collegamento al cerchio</td><td class="num">2022-04-01</td><td>Modello di utilità, Active</td><td>Xiamen Baiyexing Outdoor Sports Equipment</td><td>Superteam</td></tr>
+<tr><td class="num"><a href="#s45">CN214082966U</a></td><td>Stampo di preformatura del cerchio</td><td class="num">2020-09-27</td><td>Modello di utilità, Active</td><td>Xiamen Baiyexing Outdoor Sports Equipment</td><td>Superteam; brevetto di processo</td></tr>
+<tr><td class="num"><a href="#s46">CN216507690U</a></td><td>Collegamento gruppo raggi integrale–mozzo</td><td class="num">2022-01-14</td><td>Modello di utilità, Active</td><td>Xiamen Winspace Sporting Goods</td><td>Winspace</td></tr>
+<tr><td class="num"><a href="#s47">CN214449993U</a></td><td>Raggi a installazione integrata</td><td class="num">2021-01-26</td><td>Modello di utilità, Active</td><td>Xiamen Winspace Sporting Goods</td><td>Winspace; famiglia distinta</td></tr>
+<tr><td class="num"><a href="#s48">EP4647268A1</a></td><td>Cerchio in carbonio e metodo di fabbricazione</td><td class="num">2024-05-10</td><td>Domanda EP pubblicata (12/11/2025), Pending</td><td>Xiamen Carbonking Composites Technology</td><td>CarbonKing; non trasferibile a Carbonal</td></tr>
+<tr><td class="num"><a href="#s49">EP4331860A1</a></td><td>Raggio in carbonio preformato</td><td class="num">2021-04-28</td><td>Domanda EP pubblicata (06/03/2024), Pending</td><td>Xiamen Carbonwing Composite Technology</td><td>Esterno ai 12; pista di filiera</td></tr>
+<tr><td class="num"><a href="#s50">CN213861726U</a></td><td>Cerchio in carbonio, superficie frenante</td><td class="num">2020-12-04</td><td>Modello di utilità, Active</td><td>Xiamen Yuan Composite Materials Technology</td><td>Abbinamento a Elitewheels non dimostrato: escluso</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="schede">
+<h2 class="sec">08 · Schede per operatore</h2>
+<div class="tw"><table>
+<thead><tr><th>Operatore</th><th>Inquadramento</th><th>Professionismo</th><th>Mozzi</th></tr></thead>
+<tbody>
+<tr><td class="nm">Elitewheels</td><td>Tre entità: casa madre Yuan An, titolare del marchio; società che gestisce il sito; marchio commerciale. Fascia LinkedIn senza anno. <a class="ref" href="#s54">[54]</a></td><td>ProTeam, confermato dalla squadra</td><td>Kinetic, interno dichiarato</td></tr>
+<tr><td class="nm">Farsports</td><td>Il dato di 35 addetti viene da un rivenditore e non va esteso alla fabbrica mozzi.</td><td>Non accertato</td><td>Light Hub, lavorazioni interne dichiarate</td></tr>
+<tr><td class="nm">Winspace / Lún</td><td>Entità di Hong Kong, società cinese e impianti non vanno equiparati. Approfondimento: <a href="winspace_due_diligence.html">N.06</a>.</td><td>Squadra femminile, fonte del marchio</td><td>Lún, produttore da accertare</td></tr>
+<tr><td class="nm">Light Bicycle</td><td>Il profilo occupazionale può includere sedi commerciali.</td><td>Non accertato</td><td>DT Swiss o Pace Hub</td></tr>
+<tr><td class="nm">YOELEO</td><td>Fatturato solo stimato da database.</td><td>Elenco squadre non datato</td><td>230 DB PRO NXT, produttore ignoto</td></tr>
+<tr><td class="nm">ICAN</td><td>Unico dei 12 con sede a Shenzhen; capacità discordante fra i due siti.</td><td>Non accertato</td><td>D21 o DT240</td></tr>
+<tr><td class="nm">Superteam</td><td>Anno del dato addetti ignoto.</td><td>Kőbánya, annuncio del marchio</td><td>DT180 o ratchet a marchio, secondo il modello</td></tr>
+<tr><td class="nm">Carbonal / CarbonKing</td><td>I 25 ingegneri R&amp;S non vanno sommati ai 300+ operai senza chiarire il perimetro.</td><td>Clienti OEM non identificati</td><td>DT Swiss nelle configurazioni documentate</td></tr>
+<tr><td class="nm">LightCarbon / ProX</td><td>50 addetti ai cerchi non sono l'organico del gruppo.</td><td>Non accertato</td><td>DT240 EXP a catalogo</td></tr>
+<tr><td class="nm">DeerCycles</td><td>Fabbrica propria dal 2017, capacità 2.500 cerchi/mese dichiarata.</td><td>Clienti OEM non identificati</td><td>Da accertare</td></tr>
+<tr><td class="nm">ORNANBIKE</td><td>OEM/ODM; marchio ORNANINC lanciato nel 2026 secondo il sito.</td><td>Non accertato</td><td>SD17 / RD18 a marchio</td></tr>
+<tr><td class="nm">NTP Composites</td><td>Output di 7.000–10.000 cerchi/mese dichiarato senza audit.</td><td>Clienti OEM non identificati</td><td>Configurazione OEM da identificare</td></tr>
+</tbody></table></div>
+<p>Per tutti i 12 mancano gli stessi dati decisivi: ragione sociale e organico del perimetro ruote, ricavi dell'ultimo esercizio, spesa R&amp;S dello stesso esercizio, elenco delle famiglie brevettuali e rapporti di test sul modello.</p>
+</section>
+
+<section id="checklist">
+<h2 class="sec">09 · Prima di ordinare: cosa chiedere</h2>
+<ul class="check">
+<li><b>La distinta completa</b>Cerchio, mozzo (marca, modello, revisione), raggi e nippli della ruota esatta che stai comprando.</li>
+<li><b>I ricambi del mozzo</b>Se è a marchio proprio: corpetto, ratchet o nottolini, molle e cuscinetti devono essere in vendita, con codici.</li>
+<li><b>La garanzia per componente</b>Cerchio e mozzo possono avere durate diverse: Superteam garantisce 3 anni il cerchio e 1 anno il mozzo.</li>
+<li><b>Il crash replacement</b>Se esiste, la percentuale, la durata e se si può usare più di una volta.</li>
+<li><b>Limiti di peso e pressione</b>Superarli annulla la garanzia. Controlla anche se le gomme che usi sono compatibili con il cerchio.</li>
+<li><b>Dove si fa l'assistenza</b>Un centro in Europa evita di spedire la ruota in Cina e di pagarne il ritorno.</li>
+<li><b>I rapporti di prova</b>Per "UCI approved", SGS o EN: numero del rapporto, laboratorio, norma e modello testato.</li>
+<li><b>Dazi e IVA</b>Se la spedizione parte dalla Cina, verifica se il prezzo include le spese doganali o se restano a tuo carico.</li>
+</ul>
+</section>
+
+<section id="metodo">
+<h2 class="sec">Appendice A · Il metodo</h2>
+<details>
+<summary>Indice di affidabilità documentata (CWMRI): pesi, scale, regole</summary>
+<div class="db">
+<p>Il CWMRI è un indice analitico proposto, non una certificazione né una probabilità di guasto. Pesi e soglie sono convenzioni esplicite, da fissare prima di ordinare le aziende. Il peso del professionismo è contenuto perché la sponsorizzazione non prevalga sulle prove tecniche.</p>
+<div class="tw"><table>
+<thead><tr><th>Area</th><th>Peso</th><th>Sottoindicatori (0–5 ciascuno)</th></tr></thead>
+<tbody>
+<tr><td class="nm">Dimensione industriale</td><td class="num">20</td><td>Addetti; fatturato; scala produttiva documentata; continuità operativa</td></tr>
+<tr><td class="nm">R&amp;S e brevetti</td><td class="num">15</td><td>Intensità R&amp;S finanziaria; team dedicato documentato; portafoglio pertinente per famiglie</td></tr>
+<tr><td class="nm">Produzione e controlli</td><td class="num">20</td><td>Tracciabilità per lotto; protocolli impatto/fatica; controlli su materiali e processi; controllo finale ruota e tensioni</td></tr>
+<tr><td class="nm">Mozzi</td><td class="num">15</td><td>Origine e revisione identificabili; manuali e ricambi; durata validata di meccanismo e tenute</td></tr>
+<tr><td class="nm">Uso professionistico</td><td class="num">15</td><td>Categoria della squadra e fornitura; uso reale del modello in gara; almeno due stagioni documentate</td></tr>
+<tr><td class="nm">Validazione indipendente</td><td class="num">5</td><td>Test strutturali o di durata esterni identificabili; l'aerodinamica da sola non dà il massimo</td></tr>
+<tr><td class="nm">Garanzia e assistenza</td><td class="num">10</td><td>Condizioni chiare e praticabili; assistenza e ricambi raggiungibili nell'UE</td></tr>
+</tbody></table></div>
+<h3>Scale quantitative</h3>
+<div class="tw"><table>
+<thead><tr><th>Variabile</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+<tbody>
+<tr><td class="nm">Addetti</td><td>0 documentato</td><td>1–9</td><td>10–49</td><td>50–199</td><td>200–499</td><td>≥500</td></tr>
+<tr><td class="nm">Ricavi annui</td><td>0 documentato</td><td>&gt;0 e &lt;2 mln €</td><td>2–&lt;10 mln €</td><td>10–&lt;25 mln €</td><td>25–&lt;50 mln €</td><td>≥50 mln €</td></tr>
+<tr><td class="nm">R&amp;S / ricavi</td><td>0% documentato</td><td>&gt;0 e &lt;1%</td><td>1–&lt;2%</td><td>2–&lt;4%</td><td>4–&lt;6%</td><td>≥6%</td></tr>
+<tr><td class="nm">Famiglie brevettuali pesate</td><td>0 dopo censimento completo</td><td>&gt;0 e &lt;3</td><td>3–&lt;6</td><td>6–&lt;12</td><td>12–&lt;20</td><td>≥20</td></tr>
+<tr><td class="nm">Categoria squadra</td><td>Assenza confermata</td><td>Club / amatori</td><td>Nazionale</td><td>Continental</td><td>ProTeam / Women's ProTeam</td><td>WorldTeam / Women's WorldTeam</td></tr>
+</tbody></table></div>
+<p>Indicatori qualitativi: 0 assenza dimostrata; 1 evidenza limitata; 3 requisito documentato ma parziale; 5 requisito pienamente documentato. Scala produttiva: 1 capacità dichiarata senza periodo, 3 volumi annuali documentati, 5 capacità, utilizzo e continuità verificati. Continuità: 1 sotto i 3 anni, 3 fra 3 e 9, 5 da 10 anni, con identità societaria verificata. Uso in gara: 3 almeno un evento con modello identificabile, 5 più gare nella stagione.</p>
+<h3>Intervalli, ordinamento, qualità delle fonti</h3>
+<p>Un dato mancante resta un intervallo 0–5, non uno zero. Si calcolano S minimo e S massimo sommando i punteggi minimi e massimi. <b>A precede B solo se Smin(A) supera Smax(B)</b>; altrimenti le due aziende non sono separabili con le evidenze disponibili. Esempio: 51–200 addetti dà 3–4 punti; spesa R&amp;S €1–1,5 mln su ricavi €20–30 mln dà un'intensità fra 3,3% e 7,5%.</p>
+<p>Copertura = somma dei pesi dei sottoindicatori con evidenza utilizzabile, divisa per 100. Confidenza documentale = somma di peso × coefficiente della fonte (A 1; B 0,6; C 0,3; D 0,1; mancante 0), divisa per 100. Etichette: A ≥90, B 70–&lt;90, C 50–&lt;70, D &lt;50. Una graduatoria pubblicabile richiede almeno il 70% di copertura, identità societarie risolte e tutte le aree tecniche coperte almeno in parte.</p>
+<p><b>Esito.</b> Nessun punteggio totale è assegnato ai 12 operatori: pubblicare oggi un "86/100" darebbe una precisione che le fonti non sostengono.</p>
+</div>
+</details>
+</section>
+
+<section id="fonti">
+<h2 class="sec">Fonti</h2>
+<p style="font-size:13.5px">Pagine consultate il 5 ottobre 2026 (fonti 1–50) e il 6 ottobre 2026 (fonti 51–66). Le fonti aziendali documentano ciò che il produttore dichiara e non sono audit.</p>
+<ol class="sources">
+<li id="s1"><a href="https://www.elite-wheels.com/about-us/" target="_blank" rel="noopener">Elitewheels profilo aziendale</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s2"><a href="https://www.linkedin.com/company/elitewheels" target="_blank" rel="noopener">Elitewheels fascia addetti su LinkedIn</a><small>Profilo aziendale su piattaforma · Consultato 5 ottobre 2026</small></li>
+<li id="s3"><a href="https://www.elite-wheels.cn/about-us/" target="_blank" rel="noopener">Elitewheels casa madre cinese</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s4"><a href="https://www.elite-wheels.com/product/drive-50d-ii-disc-brake-carbon-spoke-road-wheelset/" target="_blank" rel="noopener">Elitewheels Drive 50D II e mozzo Kinetic</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s5"><a href="https://www.solutiontechnipporali.it/elitewheels-rinnova-la-partnership-per-il-2026/" target="_blank" rel="noopener">Solution Tech NIPPO Rali rinnovo fornitura Elitewheels</a><small>Fonte primaria della squadra · 6 gennaio 2026</small></li>
+<li id="s6"><a href="https://www.farsports.com/blogs/knowledge-share/exclusive-factory-tour-how-farsports-build-high-quality-wheels-you-will-proudly-recommended-to-friends" target="_blank" rel="noopener">Farsports lavorazioni e fabbrica mozzi</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s7"><a href="https://www.farsports.com/products/farsports-2026-new-s-series" target="_blank" rel="noopener">Farsports S Series 2026</a><small>Dichiarazione aziendale · Modello 2026</small></li>
+<li id="s8"><a href="https://www.farsports.com/products/far-freehubs" target="_blank" rel="noopener">Farsports corpetti di ricambio</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s9"><a href="https://www.pandapodium.cc/post/brand/farsports/" target="_blank" rel="noopener">Farsports numero addetti riportato da Panda Podium</a><small>Rivenditore con interesse commerciale · Anno del dato non indicato</small></li>
+<li id="s10"><a href="https://www.linkedin.com/company/winspace-cycling" target="_blank" rel="noopener">Winspace Cycling fascia addetti</a><small>Profilo aziendale su piattaforma · Consultato 5 ottobre 2026</small></li>
+<li id="s11"><a href="https://www.winspace.cc/products/hyper-3-d45-disc-brake-wheelset" target="_blank" rel="noopener">Winspace HYPER 3 D45</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s12"><a href="https://www.winspace.cc/pages/womens-team" target="_blank" rel="noopener">Winspace squadra femminile</a><small>Dichiarazione aziendale · Storia 2024 e 2025</small></li>
+<li id="s13"><a href="https://www.linkedin.com/company/light-bicycle" target="_blank" rel="noopener">Light Bicycle fascia addetti</a><small>Profilo aziendale su piattaforma · Consultato 5 ottobre 2026</small></li>
+<li id="s14"><a href="https://www.lightbicycle.com/research-and-development" target="_blank" rel="noopener">Light Bicycle sviluppo e produzione</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s15"><a href="https://www.lightbicycle.com/newsletter/introducing-the-pace-hub.html" target="_blank" rel="noopener">Light Bicycle Pace Hub</a><small>Dichiarazione aziendale · 13 novembre 2024</small></li>
+<li id="s16"><a href="https://www.lightbicycle.com/about-light-bicycle" target="_blank" rel="noopener">Light Bicycle configurazioni con mozzi DT Swiss</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s17"><a href="https://www.linkedin.com/company/yoeleo" target="_blank" rel="noopener">YOELEO fascia addetti</a><small>Profilo aziendale su piattaforma · Consultato 5 ottobre 2026</small></li>
+<li id="s18"><a href="https://www.yoeleobike.com/pages/sponsored-teams" target="_blank" rel="noopener">YOELEO squadre sponsorizzate</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s19"><a href="https://www.yoeleobike.com/collections/spare-parts/products/230-db-pro-nxt-hub-freehub" target="_blank" rel="noopener">YOELEO corpetto 230 DB PRO NXT</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s20"><a href="https://www.signalhire.com/companies/yoeleo" target="_blank" rel="noopener">YOELEO stima fatturato SignalHire</a><small>Stima commerciale senza metodologia visibile · Profilo aggiornato 26 marzo 2026; esercizio ignoto</small></li>
+<li id="s21"><a href="https://icancycling.com/pages/about-us/" target="_blank" rel="noopener">ICAN profilo produttivo</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s22"><a href="https://icancycling.com/collections/road-bike-wheelset" target="_blank" rel="noopener">ICAN catalogo ruote strada</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s23"><a href="https://www.icanbikes.com/" target="_blank" rel="noopener">ICAN secondo sito e capacità differente</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s24"><a href="https://superteamwheels.com/pages/about-superteam-carbon-wheels/" target="_blank" rel="noopener">Superteam società madre e storia</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s25"><a href="https://www.tradewheel.com/co/xiamen-baiyexing-outdoor-sports-equipmen-836133/" target="_blank" rel="noopener">Baiyexing fascia addetti TradeWheel</a><small>Marketplace B2B non verificato · Anno del dato non indicato</small></li>
+<li id="s26"><a href="https://superteamwheels.com/es-es/blogs/superteam-articles-carbon-wheels/superteam-wheels-enters-three-year-strategic-partnership-with-gcn-italia" target="_blank" rel="noopener">Superteam partnership triennale GCN Italia</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s27"><a href="https://www.prnewswire.com/news-releases/superteam-wheels-partners-with-kbanya-cycling-team-for-ultra-h2-wheelsets-in-uci-continental-racing-302719652.html" target="_blank" rel="noopener">Superteam annuncio Kőbánya e Ultra H2</a><small>Comunicato del produttore distribuito da PR Newswire · 20 marzo 2026</small></li>
+<li id="s28"><a href="https://superteamwheels.com/products/s-all-carbon-ultra-sl-se-d30-51-48-disc-brake" target="_blank" rel="noopener">Superteam Ultra SL SE D28 51 48 con DT180</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s29"><a href="https://superteamwheels.com/products/s-all-carbon-n2-rim-brake-carbon-spoke-wheelset-ceramic-bearing" target="_blank" rel="noopener">Superteam All Carbon N2 rim brake 36T</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s30"><a href="https://superteamwheels.com/pages/superteamwheels-warranty-policy" target="_blank" rel="noopener">Superteam condizioni di garanzia</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s31"><a href="https://www.carbonalbike.com/about-us_d1" target="_blank" rel="noopener">Carbonal rapporto CarbonKing e dimensioni</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s32"><a href="https://www.carbonalbike.com/products_13" target="_blank" rel="noopener">Carbonal configurazione strada con DT350</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s33"><a href="https://www.lightcarbon.com/about-lc_d1" target="_blank" rel="noopener">LightCarbon e ProX perimetro industriale</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s34"><a href="https://www.lightcarbon.com/uploadfile/downloads/2023-2024%20LightCarbon%20Wheels%20Catalog.pdf" target="_blank" rel="noopener">LightCarbon catalogo mozzi DT240 EXP</a><small>Catalogo aziendale · Catalogo 2023 2024</small></li>
+<li id="s35"><a href="https://www.deercycles.com/about/" target="_blank" rel="noopener">DeerCycles società e fabbrica</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s36"><a href="https://www.deercycles.com/capabilities/" target="_blank" rel="noopener">DeerCycles capacità e garanzia cerchi</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s37"><a href="https://www.ornanbike.com/about-us_d2" target="_blank" rel="noopener">ORNANBIKE società OEM ODM e garanzia</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s38"><a href="https://www.ornanbike.com/hubs_c2" target="_blank" rel="noopener">ORNANBIKE catalogo mozzi SD17 e RD18</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s39"><a href="https://ntpcomposites.com/" target="_blank" rel="noopener">NTP capacità e stabilimento</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s40"><a href="https://ntpcomposites.com/pages/in-house-product-testing/" target="_blank" rel="noopener">NTP protocolli interni di test</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s41"><a href="https://ntpcomposites.com/pages/our-story/" target="_blank" rel="noopener">NTP storia OEM ODM</a><small>Dichiarazione aziendale · Anno del dato non indicato</small></li>
+<li id="s42"><a href="https://assets.ctfassets.net/761l7gh5x5an/ua9fMSzsvRFjpyjZpuqLa/fcd4b4540c3e5a75f9020c8553074f4c/Protocole_homologation_roues_-_Approval_protocol_for_wheels_-_01.01.2024_-_ENG.pdf" target="_blank" rel="noopener">UCI protocollo approvazione ruote</a><small>Protocollo ufficiale UCI · In vigore dal 1 gennaio 2024</small></li>
+<li id="s43"><a href="https://patents.google.com/patent/CN112092532B/en" target="_blank" rel="noopener">Brevetto CN112092532B</a><small>Documento brevettuale su Google Patents · Priorità 2020-07-21</small></li>
+<li id="s44"><a href="https://patents.google.com/patent/CN217553578U/en" target="_blank" rel="noopener">Brevetto CN217553578U</a><small>Documento brevettuale su Google Patents · Priorità 2022-04-01</small></li>
+<li id="s45"><a href="https://patents.google.com/patent/CN214082966U/en" target="_blank" rel="noopener">Brevetto CN214082966U</a><small>Documento brevettuale su Google Patents · Priorità 2020-09-27</small></li>
+<li id="s46"><a href="https://patents.google.com/patent/CN216507690U/en" target="_blank" rel="noopener">Brevetto CN216507690U</a><small>Documento brevettuale su Google Patents · Priorità 2022-01-14</small></li>
+<li id="s47"><a href="https://patents.google.com/patent/CN214449993U/en" target="_blank" rel="noopener">Brevetto CN214449993U</a><small>Documento brevettuale su Google Patents · Priorità 2021-01-26</small></li>
+<li id="s48"><a href="https://patents.google.com/patent/EP4647268A1/en" target="_blank" rel="noopener">Brevetto EP4647268A1</a><small>Documento brevettuale su Google Patents · Priorità 2024-05-10</small></li>
+<li id="s49"><a href="https://patents.google.com/patent/EP4331860A1/en" target="_blank" rel="noopener">Brevetto EP4331860A1</a><small>Documento brevettuale su Google Patents · Priorità 2021-04-28</small></li>
+<li id="s50"><a href="https://patents.google.com/patent/CN213861726U/en" target="_blank" rel="noopener">Brevetto CN213861726U</a><small>Documento brevettuale su Google Patents · Priorità 2020-12-04</small></li>
+<li id="s51"><a href="https://www.elite-wheels.com/crash-replacement-policy/" target="_blank" rel="noopener">Elitewheels crash replacement policy</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s52"><a href="https://intheknowcycling.com/elitewheels-drive-50d-ii/" target="_blank" rel="noopener">In The Know Cycling, Drive 50D II: estensione di garanzia e centri assistenza</a><small>Recensione indipendente · Consultato 6 ottobre 2026</small></li>
+<li id="s53"><a href="https://irondeer.pt/elitewheels/service-center-in-portugal" target="_blank" rel="noopener">IronDeer, centro assistenza Elitewheels in Portogallo</a><small>Centro assistenza autorizzato · Consultato 6 ottobre 2026</small></li>
+<li id="s54"><a href="https://www.elite-wheels.com/terms-and-conditions/" target="_blank" rel="noopener">Elitewheels termini e condizioni (gestore del sito, titolare del marchio)</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s55"><a href="https://www.elite-wheels.com/get-in-touch/" target="_blank" rel="noopener">Elitewheels contatti e sede</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s56"><a href="https://www.farsports.com/pages/warranty" target="_blank" rel="noopener">Farsports condizioni di garanzia</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s57"><a href="https://farsports.en.made-in-china.com/" target="_blank" rel="noopener">Xiamen Far Sports, profilo Made-in-China</a><small>Directory B2B · Anno del dato non indicato · Consultato 6 ottobre 2026</small></li>
+<li id="s58"><a href="https://www.winspace.cc/pages/warranty" target="_blank" rel="noopener">Winspace condizioni di garanzia</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s59"><a href="https://www.lightbicycle.com/support-center" target="_blank" rel="noopener">Light Bicycle centro assistenza</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s60"><a href="https://www.lightbicycle.com/support/warranty-policy" target="_blank" rel="noopener">Light Bicycle garanzia e crash replacement</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s61"><a href="https://www.facebook.com/light.bicycle.carbon/" target="_blank" rel="noopener">Light Bicycle pagina ufficiale Facebook (sede)</a><small>Profilo aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s62"><a href="https://www.lightbicycle.com/newsletter/We-Have-More-Carbon-Road-Wheels-UCI-Certified.html" target="_blank" rel="noopener">Light Bicycle ruote omologate UCI e test d’impatto</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s63"><a href="https://www.yoeleobike.com/pages/return-and-warranty" target="_blank" rel="noopener">YOELEO condizioni di garanzia</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s64"><a href="https://www.yoeleobike.com/pages/crash-replacement-policy" target="_blank" rel="noopener">YOELEO crash replacement</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+<li id="s65"><a href="https://www.tradekey.com/company/Xiamen-Yoeleo-Sports-Co-Ltd-6757801.html" target="_blank" rel="noopener">Xiamen Yoeleo Sports, profilo TradeKey</a><small>Directory B2B · Anno del dato non indicato · Consultato 6 ottobre 2026</small></li>
+<li id="s66"><a href="https://icancycling.com/pages/warranty-faq" target="_blank" rel="noopener">ICAN garanzia e resi</a><small>Dichiarazione aziendale · Consultato 6 ottobre 2026</small></li>
+</ol>
+</section>
+
+<footer class="footer">
+  <div>ZD Bike · Ricerca su fonti aperte · ottobre 2026</div>
+  <div>Non è consulenza d'acquisto né certificazione di prodotto</div>
+</footer>
+</main>
+
+<script>
+(function(){
+  if(!window.L) return;
+  var map=L.map('map',{scrollWheelZoom:false,attributionControl:true}).setView([24.55,118.10],11);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}).addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:16}).addTo(map);
+  var ember='#E15A2C', navy='#0B2A42';
+  var pts=[
+    {n:'Jimei',c:[24.575,118.097],k:3,t:'Elitewheels · Light Bicycle · Farsports'},
+    {n:'Huli',c:[24.512,118.146],k:1,t:'YOELEO'}
+  ];
+  pts.forEach(function(p){
+    L.circleMarker(p.c,{radius:10+p.k*5,color:navy,weight:2,fillColor:ember,fillOpacity:.85}).addTo(map)
+      .bindPopup('<b>'+p.n+'</b><br>'+p.t);
+    L.marker(p.c,{icon:L.divIcon({className:'',html:'<div class="dist-label">'+p.n+' · '+p.k+'</div>',iconSize:null,iconAnchor:[-18,10]})}).addTo(map);
+  });
+  L.circle([24.55,118.10],{radius:17000,color:'#155A82',weight:1.5,dashArray:'6 6',fill:false}).addTo(map)
+    .bindPopup('<b>Xiamen</b><br>Altri 6 operatori con sede in città, distretto non verificato');
+  var sz=[22.543,114.058];
+  L.circleMarker(sz,{radius:10,color:navy,weight:2,fillColor:'#F0B429',fillOpacity:.9}).addTo(map).bindPopup('<b>Shenzhen</b><br>ICAN');
+  L.marker(sz,{icon:L.divIcon({className:'',html:'<div class="dist-label">Shenzhen · ICAN</div>',iconSize:null,iconAnchor:[-14,10]})}).addTo(map);
+  var xv=L.latLngBounds([24.42,117.95],[24.72,118.30]);
+  var rv=L.latLngBounds([22.3,113.8],[25.0,118.5]);
+  var cur=xv;
+  function refit(){var c=map.getContainer();if(!c.clientWidth||!c.clientHeight){setTimeout(refit,200);return;}map.invalidateSize({animate:false});map.fitBounds(cur,{animate:false});}
+  refit();
+  var bx=document.getElementById('b-x'), br=document.getElementById('b-r');
+  bx.onclick=function(){cur=xv;refit();bx.className='on';br.className='';};
+  br.onclick=function(){cur=rv;refit();br.className='on';bx.className='';};
+  window.addEventListener('load',refit);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)refit();});
+  window.addEventListener('beforeprint',refit);
+  if(window.ResizeObserver){var lw=0;new ResizeObserver(function(e){var w=e[0].contentRect.width;if(w>0&&Math.abs(w-lw)>2){lw=w;refit();}}).observe(document.getElementById('map'));}
+})();
+</script>
+</body>
+</html>

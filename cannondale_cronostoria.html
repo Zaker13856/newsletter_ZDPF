@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannondale 1971–2026: ascesa, crac e il trasloco in Europa — ZD Bike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<style>
+:root{--navy:#0B2A42;--sea:#155A82;--ember:#E15A2C;--gold:#F0B429;--sand:#F4EFE3;--border:#D9D2BE;--paper:#FCFAF3;--ink2:#3A4550}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--navy);font-family:Inter,sans-serif;line-height:1.6;font-size:15.5px}
+a{color:var(--sea)}a:hover{color:var(--ember)}
+.topbar{background:var(--navy);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:50%;border:3px solid var(--gold);object-fit:cover}
+.brand span{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:.02em;color:#fff;text-transform:uppercase}
+.topbar .tb-r{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+.page{width:min(980px,calc(100vw - 24px));margin:0 auto;padding:40px 0 60px}
+.memo-head{border-bottom:3px solid var(--navy);padding-bottom:18px;margin-bottom:24px}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ember);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:42px;line-height:1.02;margin:10px 0 10px}
+.sub{font-size:17px;color:var(--ink2);max-width:740px;margin:0;text-wrap:pretty}
+.meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--sea);text-transform:uppercase;letter-spacing:.04em}
+.meta b{color:var(--navy)}
+.verdict{background:var(--navy);color:#fff;padding:24px 26px;margin:0 0 22px}
+.verdict .vk{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.verdict p{color:#fff;max-width:none;font-size:15px;line-height:1.55}
+.verdict p:last-child{margin-bottom:0}
+.verdict b{color:var(--gold)}
+nav.toc{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px;position:sticky;top:0;background:var(--sand);padding:10px 0;z-index:500}
+nav.toc a{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:6px 12px;border:1px solid #C9BFA3;border-radius:20px;text-decoration:none;color:var(--navy);background:var(--sand);white-space:nowrap}
+nav.toc a:hover{border-color:var(--ember);color:var(--ember)}
+section{scroll-margin-top:60px}
+h2.sec{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:22px;letter-spacing:.02em;border-left:4px solid var(--ember);padding:2px 0 2px 12px;margin:40px 0 14px}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:17px;letter-spacing:.02em;margin:24px 0 8px;color:var(--sea)}
+p{margin:0 0 12px;max-width:820px;text-wrap:pretty}
+ul.pl{margin:0 0 14px;padding-left:20px;max-width:820px}
+ul.pl li{margin:4px 0}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--border);background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:13.8px;line-height:1.45}
+th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+thead th{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--sea);background:#EFEADA;font-weight:700;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.nm{font-weight:700}
+td.num{font-family:'JetBrains Mono',monospace;font-weight:600;white-space:nowrap}
+td.neg{color:#B03A2E}td.pos{color:#2E7D4F}
+.src{font-size:12.5px;color:#5b6d79;margin:-4px 0 14px}
+.callout{background:var(--paper);border:1px solid var(--border);border-left:4px solid var(--sea);padding:14px 18px;font-size:14.5px;color:var(--ink2);margin:12px 0}
+.callout b{color:var(--navy)}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:3px;white-space:nowrap}
+.tag.low{background:#EFF6EF;color:#2E7D4F}.tag.mid{background:#FFF3E2;color:#A4650C}.tag.high{background:#FCEBEB;color:#B03A2E}
+/* ownership band */
+.own{margin:6px 0 22px}
+.own-bar{display:flex;height:58px;border:1px solid var(--navy)}
+.own-bar div{display:flex;flex-direction:column;justify-content:center;padding:0 8px;overflow:hidden;color:#fff;border-right:1px solid rgba(255,255,255,.25)}
+.own-bar div:last-child{border-right:none}
+.own-bar b{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:15px;line-height:1.05;white-space:nowrap}
+.own-bar span{font-family:'JetBrains Mono',monospace;font-size:10px;opacity:.85;white-space:nowrap}
+.own-ax{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#5b6d79;margin-top:4px}
+/* bar chart */
+.chart{background:var(--paper);border:1px solid var(--border);padding:16px 18px;margin:14px 0}
+.chart .ct{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--sea);margin-bottom:12px}
+.row{display:grid;grid-template-columns:62px minmax(0,1fr) 92px;gap:10px;align-items:center;margin:7px 0;font-size:13px}
+.row .y{font-family:'JetBrains Mono',monospace;font-weight:700}
+.row .v{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;white-space:nowrap}
+.track{display:flex;height:20px;background:#EFEADA}
+.track i{display:block;height:100%}
+.bk{background:var(--sea)}.mt{background:var(--ember)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-top:10px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:12px;height:12px}
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--border);background:var(--paper);margin:14px 0}
+.stats div{padding:14px 16px;border-right:1px solid var(--border)}
+.stats div:last-child{border-right:none}
+.stats b{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:30px;line-height:1;color:var(--navy)}
+.stats span{font-size:12.5px;color:var(--ink2)}
+/* steps */
+ol.steps{list-style:none;padding:0;margin:14px 0;border-left:2px solid var(--border)}
+ol.steps li{position:relative;padding:4px 0 12px 22px;max-width:820px}
+ol.steps li::before{content:'';position:absolute;left:-7px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--ember);border:2px solid var(--sand)}
+ol.steps .d{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--ember);text-transform:uppercase;display:block}
+/* map */
+.map-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);border:1px solid var(--border);background:var(--paper);margin:14px 0}
+#map{height:100%;min-height:460px;background:#E9E5D8}
+.map-side{padding:16px 18px;border-left:1px solid var(--border);font-size:13.5px;display:flex;flex-direction:column;gap:14px}
+.map-btns{display:flex;gap:8px;flex-wrap:wrap}
+.map-btns button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;padding:6px 12px;border-radius:20px;border:1px solid #C9BFA3;background:transparent;color:var(--navy);cursor:pointer;white-space:nowrap}
+.map-btns button.on{background:var(--ember);border-color:var(--ember);color:#fff}
+.mk{display:flex;flex-direction:column;gap:7px}
+.mk div{display:flex;gap:8px;align-items:flex-start;line-height:1.35}
+.mk i{flex:none;width:13px;height:13px;border-radius:50%;border:2px solid var(--navy);margin-top:3px}
+.map-note{font-size:12px;color:#5b6d79;line-height:1.45}
+.dist-label{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10.5px;color:var(--navy);background:rgba(252,250,243,.92);border:1px solid var(--border);padding:1px 5px;white-space:nowrap}
+/* scenari */
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:14px 0}
+.scen article{background:var(--paper);border:1px solid var(--border);border-top:4px solid var(--sea);padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.scen article.s2{border-top-color:var(--gold)}.scen article.s3{border-top-color:var(--ember)}
+.scen .n{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--sea);text-transform:uppercase;letter-spacing:.05em;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.scen h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;line-height:1.1;margin:0}
+.scen p{font-size:14px;margin:0;color:var(--ink2)}
+.scen .ex{font-size:12.5px;color:#5b6d79;border-top:1px dashed var(--border);padding-top:8px;margin-top:auto}
+.sig{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);background:var(--paper);margin:14px 0}
+.sig>div{padding:14px 18px}
+.sig>div+div{border-left:1px solid var(--border)}
+.sig h5{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px}
+.sig ul{margin:0;padding-left:18px;font-size:14px}
+.sig li{margin:6px 0}
+.check{list-style:none;padding:0;margin:14px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.check li{background:var(--paper);border:1px solid var(--border);padding:14px 16px;font-size:14.3px;line-height:1.5}
+.check b{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ember);margin-bottom:4px}
+blockquote{margin:0 0 12px;padding:10px 16px;border-left:3px solid var(--gold);background:var(--paper);font-size:14.5px;max-width:820px}
+blockquote b{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin-bottom:2px}
+.footer{margin-top:40px;border-top:2px solid var(--navy);padding-top:16px;display:flex;justify-content:space-between;gap:14px;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;color:#5b6d79;flex-wrap:wrap}
+@media (max-width:760px){
+  h1{font-size:32px}
+  .map-wrap{grid-template-columns:1fr}
+  .map-side{border-left:none;border-top:1px solid var(--border)}
+  #map{min-height:360px}
+  .sig{grid-template-columns:1fr}.sig>div+div{border-left:none;border-top:1px solid var(--border)}
+  .own-bar span{display:none}.own-bar b{font-size:12px}
+  .row{grid-template-columns:44px minmax(0,1fr) 78px}
+  table{font-size:13px}th,td{padding:8px}
+}
+@media print{nav.toc,.map-btns{display:none}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><img src="images/logo.png" alt="Logo ZD Bike"><span>ZD Bike</span></a>
+  <div class="tb-r">Storia d'impresa · N.19</div>
+</header>
+
+<main class="page">
+
+<div class="memo-head">
+  <div class="kicker"><span>ZD Bike · Storia d'impresa</span><span>N.19 · Finanza</span></div>
+  <h1>Cannondale 1971–2026:<br>dal sottotetto di Wilton all'Olanda</h1>
+  <p class="sub">Cinque proprietari, un fallimento, quattro stabilimenti chiusi. La cronostoria del marchio dei "pazzi scienziati" e tre scenari per il suo futuro dentro Pon.</p>
+  <div class="meta">
+    <span>Periodo: <b>1971–2027</b></span>
+    <span>Proprietari: <b>5</b></span>
+    <span>Aggiornato al: <b>28 ottobre 2026</b></span>
+  </div>
+</div>
+
+<div class="verdict">
+  <div class="vk">In sintesi</div>
+  <p>Cannondale nasce nel 1971 in un sottotetto a Wilton (Connecticut) e nel 2027 lascerà definitivamente il Connecticut: il quartier generale mondiale si sposta a <b>Woudenberg, nei Paesi Bassi</b>. In mezzo ci sono cinque proprietari e una parabola completa: da piccola azienda di accessori a pioniere dell'alluminio, quotata in Borsa, fallita nel 2003 per l'avventura nelle moto, rilanciata da un fondo, comprata da Dorel nel 2008 e infine da Pon Holdings nel 2022.</p>
+  <p>Il 2026 è l'anno di svolta: a gennaio muore il fondatore Joe Montgomery; a giugno Pon annuncia la chiusura della fabbrica europea di Almelo e del team Cannondale Factory Racing; a ottobre la chiusura della sede storica americana, con <b>143 posti di lavoro tagliati</b>.</p>
+  <p>Nel breve periodo Cannondale resterà sul mercato, ma diventerà sempre più un marchio di Pon e sempre meno un'azienda autonoma. Il vero rischio nel lungo periodo è <b>la perdita di identità tecnica, più che la scomparsa del nome</b>.</p>
+</div>
+
+<div class="own" aria-label="Proprietari di Cannondale 1971-2027">
+  <div class="own-bar">
+    <div style="flex:23;background:#155A82"><b>Fondatori</b><span>1971–1994 · privata</span></div>
+    <div style="flex:9;background:#0B2A42"><b>Nasdaq: BIKE</b><span>1994–2003</span></div>
+    <div style="flex:5;background:#A4650C"><b>Pegasus</b><span>2003–08</span></div>
+    <div style="flex:14;background:#3A4550"><b>Dorel</b><span>2008–2022</span></div>
+    <div style="flex:5;background:#E15A2C"><b>Pon</b><span>2022–</span></div>
+  </div>
+  <div class="own-ax"><span>1971</span><span>1994</span><span>2003</span><span>2008</span><span>2022</span><span>2027</span></div>
+</div>
+
+<nav class="toc">
+  <a href="#origini">Origini</a><a href="#alluminio">Alluminio</a><a href="#innovazioni">Innovazioni e corse</a><a href="#crac">Borsa e crac</a><a href="#pegasus">Pegasus</a><a href="#dorel">Dorel</a><a href="#pon">Pon e 2026</a><a href="#mappa">Mappa sedi</a><a href="#numeri">Numeri</a><a href="#forum">Forum</a><a href="#scenari">Scenari</a><a href="#fonti">Fonti</a>
+</nav>
+
+<div class="callout"><b>Nota sulla premessa.</b> La chiusura annunciata il 21–22 ottobre 2026 è quella della sede storica americana di Wilton, che coinvolge 143 lavoratori. In Europa chiude solo la fabbrica di Almelo (120 posti), mentre la sede di Woudenberg diventa la nuova sede mondiale.</div>
+
+<section id="origini">
+<h2 class="sec">01 · Le origini (1971–1982): un carrello e una stazione</h2>
+<p>Il primo prodotto Cannondale non è una bici ma un carrello da traino, il "Bugger", lanciato nel 1971–72. L'azienda viene fondata nel 1971 da Joe Montgomery, ex operatore di Wall Street, con Murdoch MacGregor e l'ingegnere Ron Davis (<a href="https://sgbonline.com/cannondale-co-founder-joe-montgomery-passes/">SGB</a>; <a href="https://en.wikipedia.org/wiki/Cannondale">Wikipedia</a>). Altre fonti indicano come terzo socio Jim Catrambone, che secondo Wikipedia entrò poco dopo nel ruolo di manager.</p>
+<p><b>Il nome.</b> Viene dalla stazione ferroviaria di Cannondale, frazione di Wilton. Il primo ufficio era un sottotetto sopra la fabbrica di sottaceti Forrester, accanto alla stazione (<a href="https://www.pressreader.com/usa/the-news-times-sunday9FGV/20211010/282102049850358">The News-Times, 2021</a>). Il catalogo 1983 racconta un aneddoto diverso: un dipendente, dovendo dare un nome alla compagnia telefonica per l'allaccio, guardò l'insegna della stazione.</p>
+<p><b>Il progetto iniziale.</b> Secondo Wikipedia la società era nata per prefabbricati in cemento; servivano però molti capitali, così Montgomery decise di finanziarsi con prodotti più semplici.</p>
+<p><b>Il Bugger.</b> L'idea venne vedendo un ciclista arrancare in salita con un pesante zaino: il carrello era in pratica "uno zaino su ruote". Cannondale raccolse ordini da oltre 2.500 negozi in meno di 20 mesi. In inglese britannico "bugger" è una parolaccia, eppure alcuni esemplari furono esportati nel Regno Unito. Secondo <a href="https://encyclopedia.com/books/politics-and-business-magazines/cannondale-corporation">Encyclopedia.com</a> fu ideato con sei dipendenti part-time e portò a Cannondale il suo primo milione di dollari.</p>
+<p><b>Gli anni '70.</b> Cannondale produceva borse da bici, zaini e abbigliamento outdoor, diventando secondo Wikipedia il maggior produttore mondiale di borse leggere per bici. Quando arrivarono le bici, questa linea fu abbandonata.</p>
+</section>
+
+<section id="alluminio">
+<h2 class="sec">02 · L'era dell'alluminio (1983–1993): "Handmade in USA"</h2>
+<p>Nel 1983 esce dalla fabbrica di Bedford (Pennsylvania) la prima bici Cannondale, la <b>ST-500</b> da cicloturismo, con telaio in alluminio a tubi maggiorati. Era una scelta controcorrente: il settore usava l'acciaio (<a href="https://www.bikeradar.com/news/cannondale-closing-us-production-facilities">BikeRadar</a>). Costava 495 dollari, un prezzo alto per l'epoca (<a href="https://www.endurancesportswire.com/cannondale-founder-joe-montgomery-passes-away/">Endurance Sportswire</a>). Nel 1987 nasce Cannondale Europe, nel 1991 l'azienda entra in Giappone, entrambe le iniziative guidate dal figlio Scott Montgomery (<a href="https://themtblab.com/2026/01/remembering-cannondale-founder-joe-montgomery.html">The MTB Lab</a>).</p>
+<p><b>L'idea dell'alluminio non venne da Montgomery.</b> Gliela propose per lettera David Graham, ingegnere di un'azienda del Connecticut che costruiva sottomarini per la Marina; Cannondale lo assunse subito (necrologio NYT ripreso da <a href="https://www.cbinsights.com/investor/cannondale">CB Insights</a>). Un'intervista AP del 1995 data la prima bici al 1982, la maggior parte delle fonti al 1983.</p>
+<p><b>Gli stabilimenti in Pennsylvania</b> erano due: Bedford per i telai e l'assemblaggio, Philipsburg (circa 3.700 m²) per accessori, abbigliamento e sottogruppi. A metà anni '90 Cannondale deteneva 48 brevetti negli Stati Uniti.</p>
+<ul class="pl">
+<li><b>Perché una bici da turismo:</b> Cannondale era già nota per le borse da viaggio, quindi il cicloturismo era il terreno naturale.</li>
+<li><b>1984 – SM-500:</b> la prima mountain bike Cannondale.</li>
+<li><b>Il marchio di fabbrica:</b> tubi in alluminio larghi, telai saldati a mano e il logo "Handmade in USA", poi rivendicato in tutti i documenti di Borsa (<a href="https://www.sec.gov/Archives/edgar/data/930795/000095012398008534/0000950123-98-008534.txt">SEC 10-K 1998</a>).</li>
+<li><b>Lo slogan:</b> "Legalize my Cannondale", per i telai leggerissimi.</li>
+<li><b>1990:</b> l'avventuriero Kevin Foster percorre oltre 1.500 miglia sulla Grande Muraglia cinese in sella a una Cannondale.</li>
+<li><b>1992 – serie 2.8:</b> telaio progettato al computer con analisi agli elementi finiti, peso di circa 2,8 libbre. È l'antenato della famiglia CAAD.</li>
+</ul>
+<p>Il primo dato ufficiale di fatturato è di <b>54,5 milioni di dollari nell'esercizio 1991</b> (fonte SEC). Le stime precedenti (circa 60.000 dollari nel 1972, 5 milioni nel 1985, 18 nel 1988) vengono da una fonte secondaria non verificata.</p>
+</section>
+
+<section id="innovazioni">
+<h2 class="sec">03 · Innovazioni e corse: il marchio dei "pazzi scienziati"</h2>
+<p>Cannondale ha inventato diversi standard poi adottati da tutto il settore, e li ha messi alla prova nelle corse.</p>
+<div class="tw"><table>
+<thead><tr><th>Anno</th><th>Innovazione</th><th>Perché conta</th></tr></thead>
+<tbody>
+<tr><td class="num">1992</td><td class="nm">Headshok (nato come Delta V)</td><td>Ammortizzatore nel tubo sterzo; il suo tubo maggiorato anticipa lo standard OnePointFive (2001)</td></tr>
+<tr><td class="num">1993</td><td class="nm">Super V</td><td>Biammortizzata iconica degli anni '90, poi versione da discesa</td></tr>
+<tr><td class="num">metà '90</td><td class="nm">CAAD</td><td>Cannondale Advanced Aluminum Design: la linea in alluminio da corsa, oggi alla 14ª generazione</td></tr>
+<tr><td class="num">2000</td><td class="nm">Lefty</td><td>Forcella monobraccio, segno distintivo del marchio</td></tr>
+<tr><td class="num">2000–01</td><td class="nm">BB30</td><td>Movimento centrale da 30 mm, reso standard aperto e adottato da molti marchi</td></tr>
+<tr><td class="num">2015</td><td class="nm">Slate con Lefty Oliver</td><td>Una delle prime gravel "strane", anticipatrice del genere</td></tr>
+</tbody></table></div>
+<p class="src">Fonti: <a href="https://www.cyclingweekly.com/products/cannondales-joe-montgomery-wasnt-just-a-man-with-an-idea-he-ushered-in-innovative-change-that-shaped-the-bicycle-industry">Cycling Weekly</a>, <a href="https://www.theproscloset.com/blogs/news/is-cannondale-the-most-innovative-bike-company">The Pro's Closet</a>, <a href="https://bicyclewarehouse.com/blogs/news/cannondale-heritage-how-a-loft-in-connecticut-re-engineered-the-modern-bicycle">Bicycle Warehouse</a>. Le date di CAAD e BB30 variano di un anno tra le fonti.</p>
+
+<h3>Le generazioni CAAD</h3>
+<p>CAAD sta per Cannondale Advanced Aluminum Design. È la linea che ha mostrato che l'alluminio poteva vincere anche nel professionismo su strada.</p>
+<div class="tw"><table>
+<thead><tr><th>Generazione</th><th>Periodo</th><th>Cosa cambia</th></tr></thead>
+<tbody>
+<tr><td class="nm">CAAD3, CAAD4</td><td class="num">fine anni '90</td><td>Le bici della Saeco e di Cipollini, rigide e reattive in volata</td></tr>
+<tr><td class="nm">CAAD5–CAAD9</td><td class="num">anni 2000</td><td>Tubi idroformati, spessori variabili, foderi e forcelle in carbonio</td></tr>
+<tr><td class="nm">CAAD10</td><td class="num">2011</td><td>Telaio sotto i 1.150 g, prestazioni vicine al carbonio di fascia media a un prezzo più basso</td></tr>
+<tr><td class="nm">CAAD12</td><td class="num">mod. 2016</td><td>Foderi SAVE sagomati per flettere e assorbire vibrazioni; diffusione dei freni a disco</td></tr>
+<tr><td class="nm">CAAD13</td><td class="num">mod. 2020</td><td>Tubi a profilo aerodinamico troncato, foderi posteriori ribassati, cavi integrati</td></tr>
+</tbody></table></div>
+<h3>Come funzionano Headshok e Lefty</h3>
+<p>Al posto delle boccole di una forcella telescopica, l'<b>Headshok</b> scorre su file di cuscinetti ad aghi lungo una sezione quadra, dentro il tubo sterzo: meno attrito e nessun gioco laterale. La <b>Lefty</b> porta la stessa soluzione in una forcella con un solo stelo, con la ruota fissata su un perno a sbalzo. È il concetto che Cannondale chiama System Integration (Si): telaio, forcella e guarnitura progettati insieme anziché con componenti standard di terzi.</p>
+<h3>I modelli dopo il 2000</h3>
+<div class="tw"><table>
+<thead><tr><th>Anno</th><th>Modello</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="num">1997</td><td class="nm">Raven</td><td>Biammortizzata con pelli in fibra di carbonio su spina in magnesio</td></tr>
+<tr><td class="num">2001</td><td class="nm">Scalpel</td><td>Biammortizzata XC con foderi in carbonio flessibili, citata già nel 10-K 2001</td></tr>
+<tr><td class="num">2006</td><td class="nm">Synapse</td><td>Prima bici "endurance" del marchio</td></tr>
+<tr><td class="num">2008</td><td class="nm">SuperSix</td><td>Prima bici da corsa interamente in carbonio, nata per Liquigas</td></tr>
+<tr><td class="num">2011</td><td class="nm">SuperSix Evo, CAAD10</td><td>La Evo diventa l'ammiraglia; la CAAD10 105 è la bici da strada più venduta del marchio (2014)</td></tr>
+<tr><td class="num">anni 2010</td><td class="nm">Moterra (Neo, SL)</td><td>E-mountain bike: le e-bike sono oggi oltre metà delle vendite Pon</td></tr>
+<tr><td class="num">c. 2019</td><td class="nm">Topstone, SystemSix</td><td>Gravel con sospensione posteriore KingPin; bici aero da strada</td></tr>
+</tbody></table></div>
+<p class="src">Fonti: <a href="https://www.sec.gov/Archives/edgar/data/930795/000095012301506800/y53404e10-k.txt">SEC 10-K 2001</a>, <a href="https://roadcyclinguk.com/gear/cannondale-supersix-evo-and-caad10-model-year-2014-road-bikes-first-look.html">Road Cycling UK</a>, <a href="https://elevatecycling.com/blogs/news/what-year-did-cannondale-synapse-come-out">Elevate Cycling</a>, <a href="https://www.probikeshop.com/en/gb/static/technology-cannondale.html">Probikeshop</a>. Le date di Topstone, SystemSix e Moterra sono approssimative.</p>
+
+<h3>Le squadre</h3>
+<ul class="pl">
+<li><b>Volvo-Cannondale (1994).</b> Nasce il team fuoristrada ufficiale. Ai Mondiali 1994 Missy Giove vince l'oro nella discesa e Tinker Juarez l'argento nel cross-country (<a href="https://escapecollective.com/2026-marks-the-end-of-the-trail-for-cannondale-factory-racing/">Escape Collective</a>).</li>
+<li><b>Saeco-Cannondale (1997) e Mario Cipollini.</b> Prima squadra europea sponsorizzata da un costruttore americano. Al Tour de France 1999 Cipollini vince quattro tappe consecutive su una CAAD3, e diventa celebre per le bici personalizzate in base alla maglia indossata (<a href="https://en.brujulabike.com/cannondale-story/">Brujula Bike</a>).</li>
+<li><b>Liquigas-Cannondale.</b> Bici fornite dal 2007, co-sponsor nel nome dal 2010, l'anno d'oro: Ivan Basso vince il Giro d'Italia, Vincenzo Nibali la Vuelta e debutta tra i professionisti Peter Sagan (<a href="https://cyclingweekly.com/news/cannondale-takes-on-title-sponsorship-of-italian-liquigas-team-38771">Cycling Weekly</a>). Su queste bici nasce la SuperSix.</li>
+<li><b>Cannondale Pro Cycling (2013).</b> Uscita Liquigas, la squadra è gestita con la Brixia Sport di Paolo Zani; a fine stagione Cannondale sale al 90% delle quote, tra difficoltà finanziarie e pressione fiscale (<a href="https://www.oasport.it/2013/10/ciclismo-le-difficolta-finanziarie-della-cannondale/">OA Sport</a>). In squadra anche Moreno Moser ed Elia Viviani.</li>
+<li><b>EF Education.</b> Oggi Cannondale è sponsor tecnico di EF Education-EasyPost, che nel 2026 corre su una nuova SuperSix Evo (<a href="https://www.tour-magazin.de/en/professional-racing/who-rides-what-racing-bikes-and-equipment-of-the-2026-world-tour-teams/">Tour Magazin</a>), e della squadra femminile EF-Oatly-Cannondale.</li>
+</ul>
+</section>
+
+<section id="crac">
+<h2 class="sec">04 · Borsa, moto e fallimento (1994–2003)</h2>
+<p>Cannondale si quota al Nasdaq con il simbolo BIKE nel novembre 1994 a 13 dollari per azione, cresce fino a 176,8 milioni di dollari di vendite nel 1999, poi l'avventura nelle moto la porta al Chapter 11 nel gennaio 2003.</p>
+<div class="stats">
+  <div><b>$13</b><span>prezzo di debutto al Nasdaq, nov. 1994</span></div>
+  <div><b>$176,8 mln</b><span>vendite record, esercizio 1999</span></div>
+  <div><b>~$50 mln</b><span>spesi nello sviluppo delle moto</span></div>
+  <div><b>&lt;100 giorni</b><span>dall'istanza di Chapter 11 alla chiusura</span></div>
+</div>
+<p><b>Il segnale d'allarme.</b> Già nel 10-K del 1999 l'azienda scriveva che il mercato della bici era maturo e la crescita rallentata (<a href="https://www.sec.gov/Archives/edgar/data/930795/000095012399009030/0000950123-99-009030.txt">SEC 10-K 1999</a>).</p>
+<p><b>La divisione moto.</b> Dalla fine degli anni '90 Cannondale produce moto da cross (MX400, C440R, E440) e quad (FX400, Blaze, Canibal, Speed) a Bedford. La MX400 arriva sul mercato nel maggio 2000, il quad FX400 nel febbraio 2001. Nel primo trimestre 2002: utile di 628.000 dollari nelle bici, perdita ante imposte di 7,4 milioni nelle moto (<a href="https://www.roadracingworld.com/?p=62373">Roadracing World</a>).</p>
+
+<div class="chart">
+  <div class="ct">Vendite per divisione e risultato netto, esercizi chiusi a giugno (milioni di $)</div>
+  <div class="row"><span class="y">1998</span><div class="track"><i class="bk" style="width:96.99%"></i></div><span class="v">171,5 · <span style="color:#2E7D4F">+9,4</span></span></div>
+  <div class="row"><span class="y">1999</span><div class="track"><i class="bk" style="width:100%"></i></div><span class="v">176,8 · <span style="color:#2E7D4F">+5,9</span></span></div>
+  <div class="row"><span class="y">2000</span><div class="track"><i class="bk" style="width:91.86%"></i><i class="mt" style="width:0.11%"></i></div><span class="v">162,5 · <span style="color:#B03A2E">−2,5</span></span></div>
+  <div class="row"><span class="y">2001</span><div class="track"><i class="bk" style="width:80.03%"></i><i class="mt" style="width:3%"></i></div><span class="v">146,8 · <span style="color:#B03A2E">−20,3</span></span></div>
+  <div class="row"><span class="y">2002</span><div class="track"><i class="bk" style="width:76.13%"></i><i class="mt" style="width:12.44%"></i></div><span class="v">156,7 · <span style="color:#B03A2E">−15,4</span></span></div>
+  <div class="legend"><span><i class="bk"></i> bici</span><span><i class="mt"></i> moto</span><span>valori a destra: vendite totali · utile/perdita netta</span></div>
+</div>
+<p class="src">Fonte: <a href="https://www.sec.gov/Archives/edgar/data/930795/000093244002000433/cannondale10ka_6-2002.txt">SEC 10-K/A 2002</a> e 10-K precedenti. La divisione bici era in utile anche nel 2001 (8,2 milioni ante imposte, <a href="https://www.BIKEIOWA.com/News/94/cannondale-sales-down-10-percent-for-fiscal-2001">BikeIowa</a>): le perdite venivano dalle moto.</p>
+<p>Il mercato se ne accorge: il valore delle azioni in mano al pubblico crolla da 53,3 milioni di dollari (settembre 1998) a 9,0 milioni (settembre 2001).</p>
+
+<h3>Il crac</h3>
+<ol class="steps">
+<li><span class="d">27 gennaio 2003</span>Annuncio. Joe Montgomery ammette che la divisione moto minacciava quella bici.</li>
+<li><span class="d">29 gennaio 2003</span>Istanza di Chapter 11 al tribunale di Bridgeport, con 114 milioni di attività e 105 milioni di debiti (<a href="https://powersportsbusiness.com/features/2003/03/31/cannondale-goes-to-a-creditor/">Powersports Business</a>).</li>
+<li><span class="d">20 marzo 2003</span>Asta nella sede di Bethel; vince Pegasus Partners II, il principale creditore garantito.</li>
+<li><span class="d">28 marzo 2003</span>Il tribunale approva; gli azionisti perdono tutto (<a href="https://sgbonline.com/?p=4306">SGB</a>).</li>
+<li><span class="d">Aprile 2003</span>Chiusura, meno di 100 giorni dopo l'istanza (<a href="https://bikebiz.com/?p=48701">BikeBiz</a>).</li>
+</ol>
+</section>
+
+<section id="pegasus">
+<h2 class="sec">05 · L'era Pegasus (2003–2008): il rilancio con il fondo</h2>
+<p>Pegasus, fondo di private equity di Greenwich (Connecticut) con circa 800 milioni di dollari in gestione, compra Cannondale dal fallimento per circa 55–58 milioni di dollari e la rivende cinque anni dopo a circa 200 milioni.</p>
+<ul class="pl">
+<li><b>Il prezzo:</b> secondo Powersports Business, 55 milioni per la parte bici (prezzo base 57,2) più 2,8 milioni richiesti per le moto. Bicycle Retailer parla di circa 58 milioni complessivi (<a href="https://bicycleretailer.com/north-america/2008/02/04/dorel-buys-cannondale">BRAIN</a>).</li>
+<li><b>Le scelte:</b> vendita della divisione moto, ritorno alle sole bici, conferma di personale, stabilimenti e filiali in Europa, Giappone e Australia (<a href="https://sgbonline.com/?p=4416">SGB</a>).</li>
+<li><b>2005:</b> acquisizione di Sugoi, marchio canadese di abbigliamento tecnico.</li>
+<li><b>2007:</b> Cannondale inizia a importare da Taiwan i telai MTB di fascia bassa. È il primo passo verso la fine della produzione americana.</li>
+<li><b>Vendite 2007:</b> circa 200 milioni di dollari, Cannondale e Sugoi insieme. CEO: Matt Mannelly.</li>
+</ul>
+</section>
+
+<section id="dorel">
+<h2 class="sec">06 · L'era Dorel (2008–2021): la fine del "Made in USA"</h2>
+<p>Il 4 febbraio 2008 il gruppo canadese Dorel Industries compra Cannondale e Sugoi per 190–200 milioni di dollari in contanti, finanziati a debito. Cannondale diventa il "gioiello della corona" di una nuova divisione per i negozi specializzati, il Cycling Sports Group, insieme a GT e Sugoi (<a href="https://www.sec.gov/Archives/edgar/data/0000843405/000113482108000007/form6knr4feb08.htm">Dorel, comunicato SEC</a>).</p>
+<ol class="steps">
+<li><span class="d">2008 · Il valzer dei dirigenti</span>Mannelly lascia a luglio. Il successore Jeff Frehner, ex Pacific Cycle, si dimette dopo poche settimane perché non riesce a trasferirsi dal Wisconsin a Bethel; subentra ad interim Robert Baird Jr., licenziato nel dicembre 2013 (<a href="https://bicycleretailer.com/north-america/2008/08/28/frehners-decision-leave-hard-one">BRAIN</a>).</li>
+<li><span class="d">Aprile 2009 · Addio alla produzione americana</span>Entro il 2010 tutti i telai saranno prodotti a Taiwan. A Bedford i dipendenti passano da circa 300 a circa 100. Bethel resta sede mondiale, Basilea centro europeo, Taichung per acquisti e qualità (<a href="https://www.bikeradar.com/news/cannondale-closing-us-production-facilities">BikeRadar</a>; <a href="https://singletrackworld.com/2009/04/cannondale-to-cease-us-production">Singletrack</a>).</li>
+<li><span class="d">Gennaio 2014 · Chiusura di Bedford</span>Chiude l'assemblaggio residuo e il centro prove; sede e R&amp;S si spostano a Wilton, la cittadina dove Cannondale era nata. Circa 100 licenziamenti, oneri per 14–16 milioni, risparmi attesi di 6 milioni l'anno (<a href="https://bicycleretailer.com/industry-news/2014/01/23/dorel-restructures-bike-business">BRAIN</a>). Lo stabilimento chiude definitivamente nel 2015.</li>
+<li><span class="d">2020 · La nuova Europa</span>Dorel accentra le attività europee a Woudenberg e chiude gli uffici di Oldenzaal e Basilea. Dorel Sports fattura 883 milioni di dollari nel 2018 e 909 nel 2019 (<a href="https://bicycleretailer.com/industry-news/2020/03/11/dorel-sports-2019-earnings">BRAIN</a>).</li>
+<li><span class="d">Settembre 2021 · Apre Almelo</span>11.000 m², capacità europea triplicata, uno dei maggiori investimenti nella storia del marchio. Con un nuovo impianto in Georgia (USA), capacità annunciata di 500.000 bici l'anno (<a href="https://cyclingindustry.news/cannondales-european-output-to-triple-in-2022-with-new-eu-facility">Cycling Industry News</a>).</li>
+</ol>
+</section>
+
+<section id="pon">
+<h2 class="sec">07 · L'era Pon (2022–oggi) e la ristrutturazione del 2026</h2>
+<p>Pon Holdings, gruppo olandese a controllo familiare, compra Dorel Sports per <b>810 milioni di dollari</b>: accordo firmato l'8 ottobre 2021, chiuso nel primo trimestre 2022. Dorel Sports fatturava 1,2 miliardi di dollari; con Pon.Bike nasceva un gruppo da circa 2,5 miliardi di euro, forse il più grande al mondo (<a href="https://bicycleretailer.com/industry-news/2021/10/11/pon-agrees-buy-dorel-sports-810-million">BRAIN</a>). Cannondale entra così nella stessa famiglia di Santa Cruz, Cervélo, Focus e Gazelle.</p>
+<h3>I primi segnali (2023–2025)</h3>
+<ul class="pl">
+<li><b>2023:</b> Pon chiude la filiale britannica; Cannondale resta senza distributore nel Regno Unito fino all'arrivo di Saddleback nel gennaio 2025. Dopo 15 mesi l'accordo finisce e da marzo 2026 vende direttamente ai negozi tramite Pon.Bike UK (<a href="https://road.cc/news/120-employees-laid-off-as-cannondale-production-facility-to-close">road.cc</a>).</li>
+<li><b>2025:</b> Pon.Bike lancia la strategia multimarca, che unifica vendite, marketing, acquisti, produzione e logistica tra i marchi (<a href="https://www.pinkbike.com/news/cannondale-factory-in-netherlands-to-close-in-2027-with-expected-loss-of-120-jobs.html">Pinkbike</a>).</li>
+</ul>
+<h3>Il 2026, mese per mese</h3>
+<ol class="steps">
+<li><span class="d">2 gennaio</span>Muore Joe Montgomery, 86 anni (<a href="https://road.cc/?p=1191399">road.cc</a>).</li>
+<li><span class="d">1° aprile</span>Christian Dahlheim sostituisce Janus Smalbraak alla guida di Pon Holdings.</li>
+<li><span class="d">10–12 giugno</span>Annunciata la chiusura di Almelo, l'unica fabbrica dedicata solo a Cannondale, aperta appena nel 2021. 120 dipendenti coinvolti, chiusura a fine 2027, produzione spostata a Emstek (Germania) e Kėdainiai (Lituania) (<a href="https://escapecollective.com/pon-bike-to-close-cannondales-european-factory/">Escape Collective</a>).</li>
+<li><span class="d">25 giugno</span>Cannondale Factory Racing, il team MTB nato nel 1994 come Volvo-Cannondale, chiuderà a fine 2026, pochi giorni dopo una vittoria in Coppa del Mondo a Lenzerheide. Dal gennaio 2027 arriva "Cannondale Rogues", un programma basato su influencer e creator (<a href="https://www.endurancesportswire.com/cannondale-to-shut-down-factory-race-program/">Endurance Sportswire</a>). La sponsorizzazione di EF su strada continua.</li>
+<li><span class="d">21–22 ottobre</span>Annunciata la chiusura della sede di Wilton (1 Cannondale Way) entro metà 2027. Dalla notifica WARN allo Stato del Connecticut: 143 posti coinvolti, licenziamenti dal 21 dicembre 2026 al 31 dicembre 2027, inclusi il responsabile ingegneria MTB, la direzione globale R&amp;S, i product manager strada e il direttore finanziario (<a href="https://escapecollective.com/cannondale-will-close-its-us-headquarters/">Escape Collective</a>).</li>
+</ol>
+<h3>La nuova geografia</h3>
+<div class="tw"><table>
+<thead><tr><th>Funzione</th><th>Dove</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="nm">Sede mondiale</td><td>Woudenberg (Paesi Bassi)</td><td>Era la sede europea; l'Europa è il mercato più grande e in più rapida crescita</td></tr>
+<tr><td class="nm">Nord America</td><td>Santa Cruz (California)</td><td>Accanto a Santa Cruz Bicycles e Cervélo</td></tr>
+<tr><td class="nm">Ricerca e sviluppo</td><td>Friburgo (Germania)</td><td>Centro già esistente, confermato</td></tr>
+<tr><td class="nm">Produzione Europa</td><td>Emstek (Germania), Kėdainiai (Lituania)</td><td>Stabilimenti multimarca Pon</td></tr>
+<tr><td class="nm">Telai</td><td>Taiwan, con quote in Cina e Vietnam</td><td>Invariato</td></tr>
+</tbody></table></div>
+<p>Anche gli agenti commerciali Cannondale in Nord America rappresenteranno più marchi Pon. Nello stesso periodo Pon ha "messo in pausa" GT Bicycles, un altro ex marchio Dorel (<a href="https://singletrackworld.com/forum/news-comments/mass-rider-layoffs-as-pon-pauses-gt-bicycles/">Singletrack</a>).</p>
+</section>
+
+<section id="mappa">
+<h2 class="sec">08 · Mappa: le sedi di ieri e di domani</h2>
+<p>Per 43 anni la sede è rimasta nel raggio di pochi chilometri in Connecticut. Dal 2027 il baricentro passa in Europa.</p>
+<div class="map-wrap">
+  <div id="map" role="img" aria-label="Mappa delle sedi storiche e attuali di Cannondale in Stati Uniti, Europa e Taiwan"></div>
+  <div class="map-side">
+    <div class="map-btns"><button id="b-w" class="on" type="button">Mondo</button><button id="b-u" type="button">USA</button><button id="b-e" type="button">Europa</button></div>
+    <div class="mk">
+      <div><i style="background:#0B2A42"></i><span><b>Attiva dal 2027</b><br>Woudenberg (sede mondiale), Santa Cruz, Friburgo, Emstek, Kėdainiai, Taichung</span></div>
+      <div><i style="background:#E15A2C"></i><span><b>In chiusura</b><br>Wilton (metà 2027), Almelo (fine 2027)</span></div>
+      <div><i style="background:#C9BFA3;border-color:#8a8270"></i><span><b>Storica, chiusa</b><br>Bethel, Bedford, Philipsburg, Oldenzaal, Basilea</span></div>
+    </div>
+    <div class="map-note">Clicca un marcatore per periodo e ruolo. I marcatori indicano la città, non l'indirizzo esatto. Taichung è il centro acquisti e qualità dal 2009; i telai sono prodotti da fornitori a Taiwan, in Cina e in Vietnam.</div>
+  </div>
+</div>
+<div class="tw"><table>
+<thead><tr><th>Periodo</th><th>Luogo</th><th>Ruolo</th></tr></thead>
+<tbody>
+<tr><td class="num">dal 2027</td><td class="nm">Woudenberg (Paesi Bassi)</td><td>Nuova sede mondiale; sede europea dal 2020</td></tr>
+<tr><td class="num">2021–2027</td><td class="nm">Almelo (Paesi Bassi)</td><td>Assemblaggio europeo da 11.000 m², in chiusura</td></tr>
+<tr><td class="num">2013/14–2027</td><td class="nm">1 Cannondale Way, Wilton (CT)</td><td>Sede mondiale e R&amp;S, in chiusura</td></tr>
+<tr><td class="num">fino al 2020</td><td class="nm">Oldenzaal (Paesi Bassi)</td><td>Uffici e assemblaggio europeo prima di Almelo</td></tr>
+<tr><td class="num">2009–2020</td><td class="nm">Basilea (Svizzera)</td><td>Centro europeo dell'era Dorel</td></tr>
+<tr><td class="num">anni '90–2014</td><td class="nm">16 Trowbridge Drive, Bethel (CT)</td><td>Sede degli anni d'oro, della Borsa e dell'asta fallimentare</td></tr>
+<tr><td class="num">anni '80–'90</td><td class="nm">Philipsburg (Pennsylvania)</td><td>Accessori, abbigliamento, sottogruppi</td></tr>
+<tr><td class="num">1983–2015</td><td class="nm">Bedford (Pennsylvania)</td><td>Fabbrica "Handmade in USA" e moto</td></tr>
+<tr><td class="num">1971</td><td class="nm">Sottotetto Forrester, Wilton (CT)</td><td>Primo ufficio, vicino alla stazione Cannondale</td></tr>
+</tbody></table></div>
+<p class="src">Le date di apertura di Oldenzaal e Philipsburg restano da verificare.</p>
+</section>
+
+<section id="numeri">
+<h2 class="sec">09 · Numeri e passaggi di proprietà</h2>
+<p>I dati ufficiali di Cannondale da sola esistono solo per gli anni in Borsa (1994–2002). Dal 2003 l'azienda è privata o parte di un gruppo: i numeri riguardano perimetri più ampi e vanno confrontati con cautela.</p>
+<div class="tw"><table>
+<thead><tr><th>Anno</th><th>Perimetro</th><th>Vendite</th><th>Fonte</th></tr></thead>
+<tbody>
+<tr><td class="num">es. 1991</td><td>Cannondale Corp.</td><td class="num">$54,5 mln</td><td>SEC 10-K</td></tr>
+<tr><td class="num">es. 1996</td><td>Cannondale Corp.</td><td class="num">$146,0 mln</td><td><a href="https://capedge.com/filing/s3-content/0000950123-96-005258/1">SEC 10-K</a></td></tr>
+<tr><td class="num">es. 1997</td><td>Cannondale Corp.</td><td class="num">$162,5 mln</td><td><a href="https://www.sec.gov/Archives/edgar/data/930795/000095012397008149/0000950123-97-008149.txt">SEC 10-K</a></td></tr>
+<tr><td class="num">es. 1999</td><td>Cannondale Corp.</td><td class="num">$176,8 mln</td><td><a href="https://www.sec.gov/Archives/edgar/data/930795/000095012399009030/0000950123-99-009030.txt">SEC 10-K</a></td></tr>
+<tr><td class="num">2007</td><td>Cannondale + Sugoi</td><td class="num">~$200 mln</td><td><a href="https://www.sec.gov/Archives/edgar/data/0000843405/000113482108000007/form6knr4feb08.htm">Dorel/SEC</a></td></tr>
+<tr><td class="num">2021</td><td>Dorel Sports (Cannondale, Schwinn, GT, Mongoose, Caloi…)</td><td class="num">$1,2 mld</td><td><a href="https://marketscreener.com/quote/stock/DOREL-INDUSTRIES-INC-1409743/news/Pon-Holdings-B-V-completed-the-acquisition-of-Dorel-Sports-from-Dorel-Industries-Inc-TSX-DII-B--37471922">MarketScreener</a></td></tr>
+<tr><td class="num">2023</td><td>Pon.Bike (picco)</td><td class="num">€2,3 mld</td><td><a href="https://escapecollective.com/pon-bike-2025-revenue-stays-stable-at-eu2-billion/">Escape Collective</a></td></tr>
+<tr><td class="num">2024</td><td>Pon.Bike</td><td class="num">€2,1 mld</td><td>idem</td></tr>
+<tr><td class="num">2025</td><td>Pon.Bike (oltre 20 marchi)</td><td class="num">~€2,0 mld</td><td>idem</td></tr>
+</tbody></table></div>
+<p class="src">Gli esercizi Cannondale si chiudevano a fine giugno (es. 1999 = luglio 1998–giugno 1999). Nel 2025 le e-bike erano il 55% delle unità spedite da Pon ai negozi (<a href="https://www.pinkbike.com/news/industry-digest-sales-decline-for-taiwan-bike-makers-largest-bike-youtuber-becomes-brand-part-owner-and-more.html">Pinkbike</a>).</p>
+
+<h3>I passaggi di proprietà</h3>
+<div class="chart">
+  <div class="ct">Valore delle operazioni (milioni di $)</div>
+  <div class="row"><span class="y">2003</span><div class="track"><i class="mt" style="width:7.2%;background:#A4650C"></i></div><span class="v">55–58</span></div>
+  <div class="row"><span class="y">2008</span><div class="track"><i class="mt" style="width:24.7%;background:#3A4550"></i></div><span class="v">190–200</span></div>
+  <div class="row"><span class="y">2022</span><div class="track"><i class="mt" style="width:100%"></i></div><span class="v">810*</span></div>
+  <div class="legend"><span>* Prezzo di tutta Dorel Sports, non del solo marchio Cannondale: Pon non pubblica il valore attribuito a Cannondale.</span></div>
+</div>
+<div class="tw"><table>
+<thead><tr><th>Data</th><th>Operazione</th><th>Valore</th><th>Acquirente</th></tr></thead>
+<tbody>
+<tr><td class="num">nov. 1994</td><td>IPO al Nasdaq (BIKE)</td><td>debutto a $13 per azione, circa $22 mln raccolti</td><td>mercato</td></tr>
+<tr><td class="num">gen. 2003</td><td>Istanza di Chapter 11</td><td>attività $114 mln, debiti $105 mln</td><td>—</td></tr>
+<tr><td class="num">mar.–apr. 2003</td><td>Asta fallimentare</td><td>circa $55–58 mln</td><td>Pegasus Partners II</td></tr>
+<tr><td class="num">feb. 2008</td><td>Vendita di Cannondale + Sugoi</td><td>$190–200 mln</td><td>Dorel Industries</td></tr>
+<tr><td class="num">ott. 2021 – Q1 2022</td><td>Vendita di Dorel Sports</td><td>$810 mln (netto a Dorel ~$735 mln)</td><td>Pon Holdings</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="forum">
+<h2 class="sec">10 · La voce dei forum</h2>
+<p>Nei forum prevale la malinconia, ma molti osservano che il declino di Cannondale come azienda autonoma è iniziato da tempo. Sono opinioni di utenti, non fatti verificati.</p>
+<blockquote><b>"La fine di un'era è iniziata tanto tempo fa"</b>Il tono dominante sul forum dei collezionisti: qualcuno si stupisce che l'ufficio in Connecticut sia durato così a lungo, altri ricordano che il consolidamento parte con Dorel (<a href="https://community.vintagecannondale.com/threads/cannondale-is-closing-connecticut-offices-moving-to-california.3871/">Vintage Cannondale</a>).</blockquote>
+<blockquote><b>"Cannondale non è più un'azienda, è un marchio di Pon"</b>Commento ricorrente su Bike Forums, dove c'è anche chi ricorda la moto MX-400 come l'inizio dei guai (<a href="https://www.bikeforums.net/general-cycling-discussion/1324676-cannondale-restructuring-closing-its-long-time-wilton-ct-office.html">Bike Forums</a>).</blockquote>
+<blockquote><b>Le vendite reali</b>Su Pinkbike un meccanico con 30 anni di esperienza dice di vedere in officina quasi solo vecchie Saeco, e si chiede se le Cannondale nuove si vendano davvero (<a href="https://www.pinkbike.com/news/cannondale-will-shut-down-connecticut-headquarters-by-mid-2027.html">Pinkbike</a>).</blockquote>
+<blockquote><b>Il futuro dei marchi Pon</b>Dopo la pausa di GT, su Singletrack si discute del rischio che i marchi ex Dorel diventino "seconde scelte" rispetto a Santa Cruz (<a href="https://singletrackworld.com/forum/news-comments/mass-rider-layoffs-as-pon-pauses-gt-bicycles/">Singletrack</a>).</blockquote>
+<p><b>In Italia.</b> Nei forum italiani non sono emerse discussioni rilevanti sulla chiusura. Il dibattito più vivo è sotto l'articolo di <a href="https://www.bikeitalia.it/2026/10/23/cannondale-lascia-gli-stati-uniti-dopo-55-anni/">Bikeitalia</a>, dove un lettore allarga il discorso a un'Italia che, a suo dire, non sfrutta il settore per mancanza di politiche sulla mobilità alternativa. Restano aperte le domande sulla nuova sede americana: quante persone ci lavoreranno e quali funzioni di Wilton troveranno posto in Europa.</p>
+</section>
+
+<section id="scenari">
+<h2 class="sec">11 · Scenari di lungo periodo</h2>
+<p>Quello che accade nel 2026 è un copione classico quando un marchio storico entra in un grande gruppo: il nome resta, mentre la struttura aziendale (sede, fabbrica, squadra corse, competenze) si scioglie dentro il gruppo. I precedenti del settore indicano tre esiti tipici.</p>
+<div class="scen">
+  <article>
+    <div class="n"><span>Scenario 1</span><span class="tag low">Il più probabile</span></div>
+    <h4>Etichetta premium del gruppo</h4>
+    <p>Ricerca, produzione, logistica e vendite diventano condivise; il marchio conserva un'identità di prodotto e di immagine. È il modello dei gruppi automobilistici. Pon applica già questo schema a Santa Cruz e Cervélo, che dentro il gruppo vanno bene.</p>
+    <p><b>Il rischio</b> è la perdita di "carattere": Lefty, Headshok, BB30 e l'alluminio a tubi maggiorati nascevano da un'azienda piccola e indipendente, libera di rischiare.</p>
+    <div class="ex">Precedenti: Santa Cruz, Cervélo dentro Pon</div>
+  </article>
+  <article class="s2">
+    <div class="n"><span>Scenario 2</span><span class="tag mid">Possibile</span></div>
+    <h4>Scivolamento verso il basso</h4>
+    <p>Succede quando il gruppo ha già un marchio di punta nello stesso segmento e usa l'altro per coprire una fascia più economica.</p>
+    <p>Schwinn è l'esempio da manuale: marchio storico americano, fallito nel 1992 e passato di mano più volte, oggi è soprattutto un nome da grande distribuzione.</p>
+    <div class="ex">Precedente: Schwinn</div>
+  </article>
+  <article class="s3">
+    <div class="n"><span>Scenario 3</span><span class="tag high">Il più drastico</span></div>
+    <h4>Sospensione o assorbimento</h4>
+    <p>Trek ha fatto sparire Klein e ha trasformato Gary Fisher in una semplice linea di modelli Trek. Nel 2026 Pon ha "messo in pausa" GT, un altro marchio ex Dorel.</p>
+    <div class="ex">Precedenti: Klein, Gary Fisher (Trek), GT (Pon)</div>
+  </article>
+</div>
+
+<h3>I segnali sul caso Cannondale</h3>
+<div class="sig">
+  <div>
+    <h5 style="color:#2E7D4F">A favore della sopravvivenza</h5>
+    <ul>
+      <li>La sede mondiale va in Europa, indicata come mercato più grande e in più rapida crescita (<a href="https://www.tour-magazin.de/en/event/people-and-types/cannondale-closes-its-us-headquarters-headquarters-to-move-to-europe/">Tour Magazin</a>)</li>
+      <li>La ricerca e sviluppo di Friburgo resta operativa</li>
+      <li>Continua la sponsorizzazione di EF nel World Tour, un costo rilevante</li>
+      <li>Pon.Bike resta in utile</li>
+    </ul>
+  </div>
+  <div>
+    <h5 style="color:#B03A2E">Di preoccupazione</h5>
+    <ul>
+      <li>Persi quasi tutti i 143 posti del Connecticut, compresi ingegneri e responsabili R&amp;S (<a href="https://escapecollective.com/cannondale-will-close-its-us-headquarters/">Escape Collective</a>)</li>
+      <li>Chiusa la fabbrica di Almelo, aperta solo nel 2021</li>
+      <li>Il team ufficiale MTB sostituito da un programma di influencer</li>
+      <li>Vendite Pon.Bike scese da 2,3 a circa 2 miliardi di euro tra 2023 e 2025</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Gli indicatori da osservare nei prossimi anni</h3>
+<ul class="check">
+<li><b>Tecnologia</b>Cannondale continua a lanciare soluzioni proprie o inizia a condividere telai e componenti con altri marchi Pon?</li>
+<li><b>Corse</b>La squadra World Tour su strada resta su bici Cannondale dopo la scadenza degli accordi attuali?</li>
+<li><b>Vendita</b>I negozi la propongono ancora come marchio a sé o solo dentro un'offerta multimarca Pon?</li>
+<li><b>Nord America</b>La nuova base in California avrà funzioni reali (prodotto, sviluppo) o solo commerciali?</li>
+<li><b>Posizionamento</b>I prezzi e la gamma restano nella fascia alta o scendono verso il medio e l'entry level?</li>
+</ul>
+<div class="callout"><b>Nota metodologica.</b> Le conclusioni derivano dai fatti documentati in questa cronostoria e dal confronto con casi precedenti del settore (Schwinn, Klein, Gary Fisher, GT). Gli esiti descritti sono scenari possibili, non previsioni.</div>
+</section>
+
+<section id="fonti">
+<h2 class="sec">Fonti e affidabilità</h2>
+<p>Le fonti sono collegate nel testo, nel punto in cui sono usate.</p>
+<ul class="pl">
+<li><span class="tag low">Alta</span> Documenti SEC (10-K Cannondale 1996–2002, comunicato Dorel 2008), comunicati Dorel e Pon, stampa di settore (Bicycle Retailer, SGB, Escape Collective, Pinkbike, road.cc, Cyclingnews, Tour Magazin, MTB Magazine).</li>
+<li><span class="tag mid">Media</span> Wikipedia, articoli divulgativi di negozi e blog (The Pro's Closet, Bicycle Warehouse, Brujula Bike).</li>
+<li><span class="tag high">Bassa</span> Il blog Derek's Deep Dive, usato solo per stime di fatturato anni '70–'80 (alcuni numeri contraddicono la SEC); i commenti nei forum.</li>
+</ul>
+<p>Articolo in italiano di riferimento sulla chiusura: <a href="https://www.quimtbmagazine.it/2026/10/23/cannondale-chiude-la-sede-in-connecticut-quartier-generale-in-europa-dal-2027/">MTB Magazine, 23 ottobre 2026</a>.</p>
+</section>
+
+<footer class="footer">
+  <div>ZD Bike · Ricerca su fonti aperte · ottobre 2026</div>
+  <div>Cannondale è un marchio dei rispettivi titolari</div>
+</footer>
+</main>
+
+<script>
+(function(){
+  if(!window.L) return;
+  var map=L.map('map',{scrollWheelZoom:false,worldCopyJump:true});
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}).addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:16}).addTo(map);
+  var C={a:'#0B2A42',c:'#E15A2C',h:'#C9BFA3'};
+  var labels=L.layerGroup();
+  var P=[
+    ['Woudenberg',52.081,5.416,'a','Sede mondiale dal 2027; sede europea dal 2020',1],
+    ['Santa Cruz',36.974,-122.031,'a','Base nordamericana dal 2027, accanto a Santa Cruz Bicycles e Cervélo',0],
+    ['Friburgo',47.999,7.842,'a','Ricerca e sviluppo, confermata',0],
+    ['Emstek',52.83,8.15,'a','Produzione europea multimarca Pon',0],
+    ['Kėdainiai',55.288,23.974,'a','Produzione europea multimarca Pon',0],
+    ['Taichung',24.147,120.674,'a','Acquisti e qualità dal 2009',0],
+    ['Wilton',41.195,-73.438,'c','1971 sottotetto Forrester; 2013/14–2027 sede mondiale e R&S. Chiusura entro metà 2027, 143 posti',1],
+    ['Almelo',52.357,6.663,'c','2021–2027 assemblaggio europeo, 11.000 m². Chiusura a fine 2027, 120 posti',1],
+    ['Bethel',41.371,-73.414,'h','Anni \'90–2014: sede degli anni d\'oro, della Borsa e dell\'asta fallimentare',0],
+    ['Bedford',40.018,-78.504,'h','1983–2015: fabbrica "Handmade in USA" e moto',1],
+    ['Philipsburg',40.896,-78.221,'h','Anni \'80–\'90: accessori, abbigliamento, sottogruppi',0],
+    ['Oldenzaal',52.313,6.929,'h','Fino al 2020: uffici e assemblaggio europeo',0],
+    ['Basilea',47.559,7.588,'h','2009–2020: centro europeo dell\'era Dorel',0]
+  ];
+  P.forEach(function(p){
+    var big=p[5];
+    L.circleMarker([p[1],p[2]],{radius:big?9:7,color:p[3]==='h'?'#8a8270':'#0B2A42',weight:2,fillColor:C[p[3]],fillOpacity:.95}).addTo(map).bindPopup('<b>'+p[0]+'</b><br>'+p[4]);
+    if(big) L.marker([p[1],p[2]],{interactive:false,icon:L.divIcon({className:'',html:'<div class="dist-label">'+p[0]+'</div>',iconSize:null,iconAnchor:[-12,9]})}).addTo(labels);
+  });
+  function lbl(){if(map.getZoom()>=4){if(!map.hasLayer(labels))labels.addTo(map);}else if(map.hasLayer(labels))map.removeLayer(labels);}
+  map.on('zoomend',lbl);
+  var V={w:L.latLngBounds([20,-125],[58,125]),u:L.latLngBounds([35.5,-124],[43,-71]),e:L.latLngBounds([46.8,4.6],[56,24.8])};
+  var cur=V.w,btn={w:'b-w',u:'b-u',e:'b-e'};
+  function refit(){var c=map.getContainer();if(!c.clientWidth||!c.clientHeight){setTimeout(refit,200);return;}map.invalidateSize({animate:false});map.fitBounds(cur,{animate:false,padding:[10,10]});lbl();}
+  Object.keys(btn).forEach(function(k){document.getElementById(btn[k]).onclick=function(){cur=V[k];Object.keys(btn).forEach(function(j){document.getElementById(btn[j]).className=j===k?'on':'';});map.fitBounds(cur,{padding:[10,10]});};});
+  refit();
+  window.addEventListener('load',refit);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)refit();});
+  window.addEventListener('beforeprint',function(){map.invalidateSize();});
+})();
+</script>
+</body>
+</html>
